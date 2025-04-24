@@ -2,7 +2,7 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
-  <title>座席ビューア（拡張ズーム版）</title>
+  <title>座席ビューア</title>
   <style>
     body { font-family: sans-serif; padding: 20px; text-align: center; }
     canvas { border: 1px solid #ccc; margin-top: 20px; max-width: 100%; }
@@ -11,7 +11,7 @@
   </style>
 </head>
 <body>
-  <h1>座席ビューア（拡張ズーム版）</h1>
+  <h1>座席ビューア</h1>
   <p>学籍番号を入力して、座席とグループを確認してください。</p>
   <input type="text" id="studentId" placeholder="学籍番号" />
   <button onclick="highlightGroup()">表示</button>
@@ -26,13 +26,14 @@
     const minimap = document.getElementById("minimap");
     const mctx = minimap.getContext("2d");
     const output = document.getElementById("output");
-    const image = new Image(); image.src = "seatmap.png.jpg";
+    const image = new Image();
+    image.src = "seatmap.png.jpg";
 
-    // 設定
     const zoomSize = 400;
-    const zoomScale = 2;
-    let seatData = {
-  "A": [
+    const zoomScale = 1.2;
+
+    const seatData = {
+      "A": [
     {
       "start": 5,
       "count": 3,
@@ -757,9 +758,15 @@
       "dy": 45.4
     }
   ]
-};
-    let studentToSeat = { "123456":"A08", "123457":"A09", "123458":"B10" };
-    let groups = [["123456","123457","123458"]];
+    };
+
+    const studentToSeat = {
+      "123456": "A10",
+      "123457": "A11",
+      "123458": "B10"
+    };
+
+    const groups = [["123456", "123457", "123458"]];
 
     let highlightBox = null;
     let zoomedIn = true;
@@ -779,31 +786,28 @@
       drawSeats(currentSeat, currentGroup);
     });
 
-    // 指定座席の座標を探す
-    function findHighlightBox(mySeat) {
-      if (!mySeat) return null;
+    function drawSeats(mySeat = null, groupSeats = []) {
+      if (!fullImageLoaded) return;
+
+      let highlight = null;
       for (const col in seatData) {
-        for (const seg of seatData[col]) {
-          for (let i = 0; i < seg.count; i++) {
-            const label = `${col}${String(seg.start + i).padStart(2,'0')}`;
+        for (const segment of seatData[col]) {
+          for (let i = 0; i < segment.count; i++) {
+            const seatNum = segment.start + i;
+            const label = `${col}${String(seatNum).padStart(2, '0')}`;
             if (label === mySeat) {
-              return { x: seg.x, y: seg.y - seg.dy * i };
+              highlight = { x: segment.x, y: segment.y - segment.dy * i };
             }
           }
         }
       }
-      return null;
-    }
 
-    function drawSeats(mySeat = null, groupSeats = []) {
-      if (!fullImageLoaded) return;
-      highlightBox = findHighlightBox(mySeat);
+      highlightBox = highlight;
       const scale = (zoomedIn && highlightBox) ? zoomScale : 1;
 
-      // 背景描画
       if (zoomedIn && highlightBox) {
-        const sx = Math.max(0, highlightBox.x - zoomSize/2);
-        const sy = Math.max(0, highlightBox.y - zoomSize/2);
+        const sx = Math.max(0, highlightBox.x - zoomSize / 2);
+        const sy = Math.max(0, highlightBox.y - zoomSize / 2);
         canvas.width = zoomSize * zoomScale;
         canvas.height = zoomSize * zoomScale;
         ctx.drawImage(image, sx, sy, zoomSize, zoomSize, 0, 0, canvas.width, canvas.height);
@@ -813,49 +817,77 @@
         ctx.drawImage(image, 0, 0);
       }
 
-      // 座席描画
       for (const col in seatData) {
-        for (const seg of seatData[col]) {
-          for (let i = 0; i < seg.count; i++) {
-            const label = `${col}${String(seg.start + i).padStart(2,'0')}`;
-            let x = seg.x;
-            let y = seg.y - seg.dy * i;
+        for (const segment of seatData[col]) {
+          for (let i = 0; i < segment.count; i++) {
+            const seatNum = segment.start + i;
+            const label = `${col}${String(seatNum).padStart(2, '0')}`;
+            let x = segment.x;
+            let y = segment.y - segment.dy * i;
+
             if (zoomedIn && highlightBox) {
-              x = (x - highlightBox.x + zoomSize/2) * zoomScale;
-              y = (y - highlightBox.y + zoomSize/2) * zoomScale;
+              x = (x - highlightBox.x + zoomSize / 2) * zoomScale;
+              y = (y - highlightBox.y + zoomSize / 2) * zoomScale;
             }
+
             ctx.beginPath();
-            ctx.arc(x, y, 20 * scale, 0, Math.PI*2);
-            ctx.fillStyle = (label === mySeat) ? 'rgba(0,0,255,0.3)' : (groupSeats.includes(label) ? 'rgba(0,255,0,0.3)' : 'rgba(255,0,0,0.3)');
-            ctx.fill();
-            //if (label === mySeat) { ctx.strokeStyle='black'; ctx.lineWidth=2*scale; ctx.stroke(); }
-            //ctx.fillStyle='black';
-            //ctx.font=`${10*scale}px sans-serif`;
-            //ctx.fillText(label, x + 10*scale, y + 3*scale);
+            ctx.arc(x, y, 20 * scale, 0, Math.PI * 2);
+            if (label === mySeat) {
+              ctx.fillStyle = "rgba(0, 255, 0, 0.3)";
+              ctx.fill();
+            } else if (groupSeats.includes(label)) {
+              ctx.fillStyle = "rgba(0, 255, 255, 0.3)";
+              ctx.fill();
+            } else {
+              ctx.fillStyle = "rgba(255, 0, 0, 0.3)";
+              ctx.fill();
+            }
           }
         }
       }
 
-      // ミニマップ描画
-      mctx.clearRect(0,0,minimap.width,minimap.height);
+      const s = minimap.width / image.width;
+      mctx.clearRect(0, 0, minimap.width, minimap.height);
       mctx.drawImage(image, 0, 0, minimap.width, minimap.height);
       if (highlightBox) {
-        const s = minimap.width / image.width;
-        mctx.strokeStyle='gold'; mctx.lineWidth=2;
-        mctx.strokeRect((highlightBox.x - zoomSize / 2) * s, (highlightBox.y - zoomSize / 2) * s, zoomSize * s, zoomSize * s);
+        mctx.strokeStyle = "red";
+        mctx.lineWidth = 1;
+        mctx.strokeRect(
+          (highlightBox.x - zoomSize / 2) * s,
+          (highlightBox.y - zoomSize / 2) * s,
+          zoomSize * s,
+          zoomSize * s
+        );
       }
     }
 
     function highlightGroup() {
       const inputId = document.getElementById("studentId").value.trim();
       const mySeat = studentToSeat[inputId];
-      if (!mySeat) return alert("その学籍番号は登録されていません。");
-      const myGroup = groups.find(g=>g.includes(inputId))||[];
-      const groupInfo = myGroup.map(id=>studentToSeat[id]);
+      if (!mySeat) {
+        currentSeat = null;
+        currentGroup = [];
+        output.innerHTML = "<strong>エラー:</strong> 学籍番号が登録されていません。";
+        drawSeats();
+        return;
+      }
+
+      zoomedIn = true;
+      const myGroup = groups.find(g => g.includes(inputId)) || [];
+      const groupInfo = myGroup.map(id => ({ id, seat: studentToSeat[id] || "-" }));
+
       currentSeat = mySeat;
-      currentGroup = groupInfo.filter(s=>s!==mySeat);
+      currentGroup = groupInfo.map(g => g.seat).filter(s => s !== mySeat);
+
       drawSeats(currentSeat, currentGroup);
-      output.innerHTML = `<strong>あなたの席:</strong> ${mySeat}<br><strong>グループ:</strong><ul>${myGroup.map(id=>`<li>${id} → ${studentToSeat[id]}${id===inputId?'（あなた）':''}</li>`).join('')}</ul>`;
+
+      output.innerHTML = `
+        <strong>あなたの席:</strong> ${mySeat}<br>
+        <strong>グループ:</strong><br>
+        <ul>
+          ${groupInfo.map(g => `<li>${g.id} → ${g.seat}${g.id === inputId ? "（あなた）" : ""}</li>`).join("")}
+        </ul>
+      `;
     }
   </script>
 </body>
