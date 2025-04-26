@@ -37,11 +37,11 @@
     <h1>座席ビューア</h1>
     <p>HRNOを入力して、座席を確認してください。</p>
     <input type="text" id="studentId" placeholder="学籍番号" />
-    <button onclick="highlightGroup()">表示</button>
-    <button onclick="goHome()">ホームに戻る</button>
-
-    <canvas id="seatCanvas"></canvas>
+    <p><button onclick="highlightGroup()">表示</button>
+    <button onclick="goHome()">ホームに戻る</button></p>
     <div id="output"></div>
+    <canvas id="seatCanvas"></canvas>
+    
     <canvas id="minimap" title="クリックで拡大/全体を切り替え"></canvas>
   </div>
 
@@ -68,8 +68,8 @@
     const image = new Image();
     image.src = "seatmap.png.jpg";
 
-    const zoomSize = 400;
-    const zoomScale = 1.2;
+    const zoomSize = 650;
+    const zoomScale = 0.7;
 
     const seatData = {
   "A": [
