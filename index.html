@@ -24,6 +24,7 @@
       transition: all 0.2s ease;
     }
     #logo{width:60%;}
+    #te{text-align:left}
   </style>
 </head>
 <body>
@@ -34,11 +35,11 @@
   </div>
 
   <div id="viewerScreen" class="hidden">
-    <h1>座席ビューア</h1>
+    <div id="te"><h1>座席ビューア</h1>
     <p>HRNOを入力して、座席を確認してください。</p>
     <input type="text" id="studentId" placeholder="学籍番号" />
     <p><button onclick="highlightGroup()">表示</button>
-    <button onclick="goHome()">ホームに戻る</button></p>
+    <button onclick="goHome()">ホームに戻る</button></p></div>
     <div id="output"></div>
     <canvas id="seatCanvas"></canvas>
     
