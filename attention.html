@@ -2,32 +2,26 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
-  <title>座席ビューア</title>
   <link href="https://fonts.googleapis.com/css2?family=Mochiy+Pop+One&display=swap" rel="stylesheet">
-  <style>
-    body { font-family: sans-serif; padding: 20px; text-align: center; }
-    .hidden { display: none; }
-    canvas { border: 1px solid #ccc; margin-top: 20px; max-width: 100%; }
-    #output { margin-top: 20px; background: #ffffff; padding: 10px; border: 1px solid #ccc; text-align: left; max-width: 600px; margin: auto; }
-    #minimap { position: absolute; top: 20px; right: 20px; border: 1px solid #999; width: 300px; cursor: pointer; }
-    /*button { margin: 5px; padding: 8px 16px; font-size: 16px; */
-    button {
-      background: #d06960;
-      color: rgb(255, 255, 255);
-      border: none;
-      border-radius: 25px;
-      padding: 12px 24px;
-      font-size: 16px;
-      cursor: pointer;
-      box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
-      margin: 10px;
-      transition: all 0.2s ease;
-    }
-    #logo{width:60%;}
-  </style>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div id="homeScreen">
-    <h1><img src="attention.jpg.png" id="logo"></h1>
+
+
+  <div class="spotlight-bg1"></div>
+  <div class="spotlight-bg2"></div>
+  <div class="spotlight-bg3"></div>
+  <div class="spotlight-bg4"></div>
+  <div class="spotlight-bg5"></div>
+  <div class="spotlight-bg6"></div>
+
+  <div id="homeScreenAttention">
+    <h1>以下の注意事項を必ず守ること。</h1>  
+    <p>・危険であるため、公演中は立ち上がらないこと。</p> 
+    <p>・許可のない録画・録音は禁止である。 </p>
+    <p>・公演中、携帯電話は必ずマナーモードに設定すること。</p> 
+    <p>・ビン類および蓋のない飲み物の持ち込みはしないこと。</p> 
+    <p>・換気時間中には、必ず水分補給を行うこと。</p> 
+    <p>・会場内では、スタッフの指示に従うこと。</p>
     <p><button onclick="location.href='index.html'">ホームに戻る</button></p>
   </div>

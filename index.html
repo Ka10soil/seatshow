@@ -3,28 +3,45 @@
 <head>
   <meta charset="UTF-8">
   <title>座席ビューア</title>
-  <link href="https://fonts.googleapis.com/css2?family=Mochiy+Pop+One&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
+
+
 <body>
+
+  <div id="blackout"></div>
+
+  <div class="spotlight-bg1"></div>
+  <div class="spotlight-bg2"></div>
+  <div class="spotlight-bg3"></div>
+  <div class="spotlight-bg4"></div>
+  <div class="spotlight-bg5"></div>
+  <div class="spotlight-bg6"></div>
+
+
+
+  <div class="content">
   <div id="homeScreen">
-    <h1><img src="logo.png.jpg" id="logo""></h1>
-    <p></p><button onclick="goToViewer()">自分の席をチェック</button>
-    <button onclick="location.href='attention.html'">注意事項</button></p>
+    <p><img src="logo.png-removebg-preview.png" id="logo"></p>
+    <p></p><button class="wave" onclick="goToViewer()">自分の席をチェック</button>
+    <button class="wave" onclick="location.href='attention.html'">注意事項</button></p>
   </div>
 
   <div id="viewerScreen" class="hidden">
     <div id="te"><h1>座席ビューア</h1>
     <p>HRNOを入力して、座席を確認してください。</p>
-    <input type="text" id="studentId" placeholder="学籍番号" />
+    <input type="text" id="studentId" placeholder="HRNO" />
     <p><button onclick="highlightGroup()">表示</button>
     <button onclick="goHome()">ホームに戻る</button></p></div>
     <div id="output"></div>
     <canvas id="seatCanvas"></canvas>
     
-    <canvas id="minimap" title="クリックで拡大/全体を切り替え"></canvas>
+    <canvas id="minimap"></canvas>
   </div>
 
-  <script src="index.js"></script>
+  <script src="script.js"></script>
+</div>
+
 </body>
 </html>
