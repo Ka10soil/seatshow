@@ -5,7 +5,7 @@ html {
   }
   body {
     max-width: 600px;  /* スマホっぽい幅に制限 */
-    margin: 0 auto;    /* 中央寄せ */
+    mgin: 0 auto;    /* 中央寄せ */
 
 
         background: linear-gradient(45deg, black);
@@ -243,11 +243,15 @@ html {
             line-height: 1.0;color: white;}
     #studentId {
         background: white;
+        color:black;
         border: 2px solid #ccc;
         border-radius: 12px;
         box-shadow: 0 2px 6px rgba(0,0,0,0.1);
         padding: 6px;
         font-size: 10px;
+    }
+    .seatmap.png.jp{
+        filter: invert(100%);
     }
     
     @keyframes zoomIn {

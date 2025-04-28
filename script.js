@@ -385,7 +385,7 @@ function drawSeats(mySeat = null, groupSeats = []) {
 
         ctx.fillStyle = groupSeats.includes(label) 
         ? "rgba(100, 200, 255, 0.3)"
-        : (label === mySeat ? "rgba(190, 70, 255, 0.3)" : "rgba(22, 22, 62, 0.4)");
+        : (label === mySeat ? "rgba(190, 70, 255, 0.3)" : "rgba(22, 22, 62, 0)");
 
         ctx.fillRect(x - size/2, y - size/2, size, size);
       }
