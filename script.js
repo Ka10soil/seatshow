@@ -1,11 +1,16 @@
 const homeScreen = document.getElementById("homeScreen");
 const viewerScreen = document.getElementById("viewerScreen");
+const attentionScreen = document.getElementById("attentionScreen");
+const formScreen = document.getElementById("formScreen");
 
 function goToViewer() {
+  showScreenWithGlitch('viewerScreen');
   blackout.style.pointerEvents = 'auto';
   blackout.style.opacity = 1;
   setTimeout(() => {
     document.getElementById('homeScreen').style.display = 'none';
+    document.getElementById('formScreen').style.display = 'none';
+    document.getElementById('attentionScreen').style.display = 'none';
     document.getElementById('viewerScreen').style.display = 'block';
     blackout.style.opacity = 0;
     blackout.style.pointerEvents = 'none';
@@ -16,10 +21,50 @@ function goToViewer() {
   drawSeats(currentSeat, currentGroup);
 }
 
-function goHome() {
+function goToAttentionScreen() {
+  showScreenWithGlitch('attentionScreen')
   blackout.style.pointerEvents = 'auto';
   blackout.style.opacity = 1;
   setTimeout(() => {
+    document.getElementById('homeScreen').style.display = 'none';
+    document.getElementById('formScreen').style.display = 'none';
+    document.getElementById('viewerScreen').style.display = 'none';
+    document.getElementById('attentionScreen').style.display = 'block';
+    blackout.style.opacity = 0;
+    blackout.style.pointerEvents = 'none';
+  }, 500);
+
+  homeScreen.classList.add("hidden");
+  viewerScreen.classList.remove("hidden");
+  drawSeats(currentSeat, currentGroup);
+}
+
+function goToformScreen() {
+  showScreenWithGlitch('formScreen')
+  blackout.style.pointerEvents = 'auto';
+  blackout.style.opacity = 1;
+  setTimeout(() => {
+    document.getElementById('homeScreen').style.display = 'none';
+    document.getElementById('attentionScreen').style.display = 'none';
+    document.getElementById('viewerScreen').style.display = 'none';
+    document.getElementById('formScreen').style.display = 'block';
+    blackout.style.opacity = 0;
+    blackout.style.pointerEvents = 'none';
+  }, 500);
+
+  homeScreen.classList.add("hidden");
+  viewerScreen.classList.remove("hidden");
+  drawSeats(currentSeat, currentGroup);
+}
+
+
+function goHome() {
+  showScreenWithGlitch('homeScreen')
+  blackout.style.pointerEvents = 'auto';
+  blackout.style.opacity = 1;
+  setTimeout(() => {
+    document.getElementById('formScreen').style.display = 'none';
+    document.getElementById('attentionScreen').style.display = 'none';
     document.getElementById('viewerScreen').style.display = 'none';
     document.getElementById('homeScreen').style.display = 'block';
     blackout.style.opacity = 0;
@@ -31,6 +76,31 @@ function goHome() {
 }
 
 const blackout = document.getElementById('blackout');
+function showScreenWithGlitch(screenId) {
+  const blackout = document.getElementById('blackout');
+  const glitch = document.getElementById('glitch');
+
+  // グリッチ発動
+  glitch.style.opacity = 1;
+  glitch.style.animation = 'glitchEffect 0.6s ease-in-out';
+
+  setTimeout(() => {
+    blackout.style.opacity = 1;
+  }, 300);
+
+  setTimeout(() => {
+    // ここで画面切り替え！！
+    document.querySelectorAll('.screen').forEach(s => s.classList.add('hidden'));
+    document.getElementById(screenId).classList.remove('hidden');
+
+    // blackoutとglitchをリセット
+    glitch.style.opacity = 0;
+    glitch.style.animation = 'none';
+    blackout.style.opacity = 0;
+  }, 800);
+}
+
+
 const links = document.querySelectorAll('.fade-link');
 
 
@@ -56,7 +126,7 @@ const image = new Image();
 image.src = "seatmap.png.jpg";
 
 const zoomSize = 550;
-const zoomScale = 1.3;
+const zoomScale = 0.55;
 
 const ax = 1200
 const seatData = {
@@ -367,3 +437,19 @@ function highlightGroup() {
 }
 
 
+let button = document.querySelector('.button');
+let buttonText = document.querySelector('.tick');
+
+const tickMark = "<svg width=\"58\" height=\"45\" viewBox=\"0 0 58 45\" xmlns=\"http://www.w3.org/2000/svg\"><path fill=\"#fff\" fill-rule=\"nonzero\" d=\"M19.11 44.64L.27 25.81l5.66-5.66 13.18 13.18L52.07.38l5.65 5.65\"/></svg>";
+
+buttonText.innerHTML = "Submit";
+
+button.addEventListener('click', function() {
+
+  if (buttonText.innerHTML !== "Submit") {
+    buttonText.innerHTML = "Submit";
+  } else if (buttonText.innerHTML === "Submit") {
+    buttonText.innerHTML = tickMark;
+  }
+  this.classList.toggle('button__circle');
+});

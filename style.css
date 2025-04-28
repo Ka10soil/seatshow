@@ -4,6 +4,10 @@ html {
     text-size-adjust: 100%;
   }
   body {
+    max-width: 600px;  /* スマホっぽい幅に制限 */
+    margin: 0 auto;    /* 中央寄せ */
+
+
         background: linear-gradient(45deg, black);
         background-attachment: fixed; 
         height:max-height;
@@ -155,22 +159,20 @@ html {
         max-width: 100%; 
     }
     #output {
-        margin-top: 20px;
         background: rgb(0, 0, 0, 0);
         padding: 10px; 
         border: 1px solid #ccc; 
         text-align: left; 
-        max-width: 600px; 
-        margin: auto;
-        font-size: 30px;
+        max-width: 100%; 
+        font-size: 14px;
         color: rgb(255, 255, 255);
     }
     #minimap {
         position: absolute; 
-        top: 20px; 
-        right: 20px; 
+        top: 6px; 
+        right: 2px; 
         border: 1px solid #999; 
-        width: 360px; 
+        width: 140px; 
         cursor: pointer; 
     }
     #blackout {
@@ -182,33 +184,45 @@ html {
         transition: opacity 0.5s;
         z-index: 10000;
     }
+    #password {
+        margin-top: 20px;
+        padding: 10px; 
+        max-width: 80%; 
+        margin: auto;
+        font-size: 16px;
+        color: rgb(0, 0, 0);
+    }
+    #ul{
+        padding-top: 0px;
+        padding-bottom: 0px;
+      }
       
     
     button {
         background: linear-gradient(45deg, #00FFFF, #FF059A);
         color: white;
         text-shadow:
-        -2px -2px 0 black,
-        0px -2px 0 black,
-        2px -2px 0 black,
-        -2px  0px 0 black,
-        2px  0px 0 black,
-        -2px  2px 0 black,
-        0px  2px 0 black,
-        2px  2px 0 black;
+        -1px -1px 0 black,
+        0px -1px 0 black,
+        2px -1px 0 black,
+        -1px  0px 0 black,
+        1px  0px 0 black,
+        -1px  1px 0 black,
+        0px  1px 0 black,
+        1px  1px 0 black;
         border: none;
         border-radius: 30px;
-        padding: 14px 28px;
-        font-size: 32px;
-        font-weight: bold;
+        padding: 6px 10px;
+        font-size: 13px;
+        font-weight: bolder;
         cursor: pointer;
         transition: transform 0.1s ease, box-shadow 0.1s ease;
-        box-shadow: 0 6px black;
-        margin:10px;
+        box-shadow: 0 3px rgb(100, 100, 100);
+        margin:2px;
         }
         button:active {
         transform: translateY(4px);
-        box-shadow: 0 2px black;
+        box-shadow: 0 1px rgb(100, 100, 100);
       }
       .wave{
         animation: poyoyon3 2s ease 0s infinite alternate forwards running;
@@ -220,19 +234,22 @@ html {
         filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.8));
         animation: zoomIn 0.8s cubic-bezier(0.25, 1, 0.5, 1) forwards;
     }
-    #te{text-align:left; font-size: 25px;color: white;}
-    #homeScreenAttention{
-        text-align:left; font-size: 28px;
+    #te{text-align:left; font-size: 10px;color: white;}
+    #attentionScreen{
+        text-align:left; font-size: 14px;
         line-height: 1.0;color: white;}
+    #formScreen{
+            text-align:left; font-size: 16px;
+            line-height: 1.0;color: white;}
     #studentId {
         background: white;
         border: 2px solid #ccc;
         border-radius: 12px;
         box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-        padding: 12px;
-        font-size: 30px;
+        padding: 6px;
+        font-size: 10px;
     }
-      
+    
     @keyframes zoomIn {
         0% {
           transform: scale(0.8);
@@ -253,3 +270,32 @@ html {
           opacity: 1;
         }
       }
+      
+      #glitch {
+        position: fixed;
+        inset: 0;
+        background: repeating-linear-gradient(
+          0deg,
+          #fff 0px,
+          #fff 2px,
+          #000 2px,
+          #000 4px
+        );
+        opacity: 0;
+        mix-blend-mode: difference;
+        pointer-events: none;
+        z-index: 10001;
+        animation: none;
+      }
+      
+      @keyframes glitchEffect {
+        0% { transform: translate(0,0); }
+        20% { transform: translate(-5px, 5px); }
+        40% { transform: translate(5px, -5px); }
+        60% { transform: translate(-5px, -5px); }
+        80% { transform: translate(5px, 5px); }
+        100% { transform: translate(0,0); }
+      }
+      
+      
+      
