@@ -356,7 +356,7 @@ html {
     margin: 0 auto;     /* 余裕を持って少し内側に */
     width: 100%;     /* スマホでも右に出ないように */
     opacity: 0;
-    animation: switch 16s linear infinite;
+    animation: switch 20s linear infinite;
     text-align: center;
     word-break: break-word; /* 長文でも折り返し */
   }
@@ -366,6 +366,7 @@ html {
 #fly-in div:nth-child(2) { animation-delay: 4s}
 #fly-in div:nth-child(3) { animation-delay: 8s}
 #fly-in div:nth-child(4) { animation-delay: 12s}
+#fly-in div:nth-child(5) { animation-delay: 16s}
 
 
 @keyframes switch {
@@ -377,6 +378,23 @@ html {
     100% { opacity: 0}
 }
 
-      
 
 
+
+.animated {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 0.6s ease forwards;
+}
+
+.animated:nth-child(1) { animation-delay: 0.1s; }
+.animated:nth-child(2) { animation-delay: 0.3s; }
+.animated:nth-child(3) { animation-delay: 0.5s; }
+/* 必要ならもっと続ける */
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
