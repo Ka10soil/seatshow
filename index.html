@@ -4,15 +4,16 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="https://fonts.googleapis.com/css2?family=Mochiy+Pop+One&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
-  <title>パスワード保護フォーム</title>
+  <link rel="stylesheet" href="password.css">
 </head>
 <body>
-  <h2>パスワードを入力してください</h2>
-  <form id="password-form">
-    <input type="password" id="password" placeholder="パスワード" required>
-    <button type="submit">送信</button>
-  </form>
+  <div id="authScreen">
+    <h1>アクセス制限中</h1>
+    <p>パスワードを入力してください</p>
+    <input type="password" id="authInput" placeholder="パスワード" />
+    <button onclick="checkPassword()">送信</button>
+    <p id="authMessage"></p>
+
 
   <script src="password.js"></script>
 </body>

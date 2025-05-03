@@ -55,6 +55,32 @@
     <button class="wave" onclick="goToViewer()">自分の席をチェック</button> 
     <button class="wave" onclick="goToAttentionScreen()">注意事項</button>
     <!-- これは今まで通り -->
+     <p></p>
+     
+    <div id="fly-in">  
+      <div><span>まずは申し込みをしよう</span></div>
+      <div><span>座席チェック機能は座席抽選終了後ご利用いただけます</span></div>
+      <div>Tips<span>自分の席は赤、グループメンバーの席は水色で表示されます </span></div>
+      <div>Tips<span>ミニマップをクリックして拡大/通常表示を切り替えよう </span></div>
+    </div>  
+   
+
+    <script>
+      // イベント日を設定（例：2025年5月18日）
+      const targetDate = new Date('2025-05-30');
+      const today = new Date();
+      const diffTime = targetDate - today;
+      const daysLeft = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+    
+      // DOMが読み込まれたら実行
+      document.addEventListener('DOMContentLoaded', function () {
+        // SVG内のtext要素を取得して書き換える
+        const textElement = document.querySelector('#s-text text');
+        if (textElement) {
+          textElement.textContent = `IS祭まで残り${daysLeft}日！`;
+        }
+      });
+    </script>
   </div>
 
   <div id="viewerScreen" class="hidden">

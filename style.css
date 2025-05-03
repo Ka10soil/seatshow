@@ -5,7 +5,7 @@ html {
   }
   body {
     max-width: 600px;  /* スマホっぽい幅に制限 */
-    mgin: 0 auto;    /* 中央寄せ */
+    margin: 0 auto;    /* 中央寄せ */
 
 
         background: linear-gradient(45deg, black);
@@ -90,7 +90,7 @@ html {
       .spotlight-bg4 {
         position: fixed;
         inset: 0;
-        background: radial-gradient(circle at center, rgb(167, 127, 255) 0%, transparent 10%);
+        background: radial-gradient(circle at center, rgb(148, 99, 255) 0%, transparent 10%);
         background-size: 400% 400%;
         background-position: center;
         pointer-events: none;
@@ -114,7 +114,7 @@ html {
       .spotlight-bg6 {
         position: fixed;
         inset: 0;
-        background: radial-gradient(circle at center, rgb(255, 132, 212) 0%, transparent 10%);
+        background: radial-gradient(circle at center, rgb(255, 97, 200) 0%, transparent 10%);
         background-size: 400% 400%;
         background-position: center;
         pointer-events: none;
@@ -229,7 +229,7 @@ html {
       }
       
     #logo{
-        margin-top: 70px;
+        margin-top: 10%;
         width: 100%;
         filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.8));
         animation: zoomIn 0.8s cubic-bezier(0.25, 1, 0.5, 1) forwards;
@@ -253,6 +253,7 @@ html {
     .seatmap.png.jp{
         filter: invert(100%);
     }
+    
     
     @keyframes zoomIn {
         0% {
@@ -293,13 +294,89 @@ html {
       }
       
       @keyframes glitchEffect {
-        0% { transform: translate(0,0); }
-        20% { transform: translate(-5px, 5px); }
-        40% { transform: translate(5px, -5px); }
-        60% { transform: translate(-5px, -5px); }
-        80% { transform: translate(5px, 5px); }
-        100% { transform: translate(0,0); }
+        0% {
+          transform: none;
+          opacity: 0;
+          filter: none;
+        }
+        10% {
+          transform: skewX(-5deg) scale(1.02);
+          opacity: 0.6;
+          filter: hue-rotate(30deg) contrast(1.2);
+        }
+        20% {
+          transform: translateX(-3px) scale(1.05);
+          opacity: 0.8;
+          filter: hue-rotate(-40deg) saturate(2);
+        }
+        30% {
+          transform: translateX(3px) skewY(2deg);
+          opacity: 1;
+          filter: brightness(1.4);
+        }
+        50% {
+          transform: scale(0.98);
+          opacity: 0.4;
+        }
+        100% {
+          transform: none;
+          opacity: 0;
+          filter: none;
+        }
       }
       
+
+
+  #fly-in {
+    font-size: 25px;
+        position: relative;
+        height: 3em; /* ← 実際の高さを抑える */
       
+      top: 30px;
+      margin: 0 auto;       /* ← 40vhは大きすぎる */
+      height: auto;           /* ← 固定高さを外す */
+      text-align: center;     /* ← オプションで中央寄せ */
+  
+    height: 3em;
+    
+    text-transform: uppercase;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  #fly-in span {
+    display: block;
+    font-size: 13px;
+    opacity: 0.8;
+  }
+  
+  #fly-in div {
+    position: absolute;
+    top: 0;
+    margin: 0 auto;     /* 余裕を持って少し内側に */
+    width: 100%;     /* スマホでも右に出ないように */
+    opacity: 0;
+    animation: switch 16s linear infinite;
+    text-align: center;
+    word-break: break-word; /* 長文でも折り返し */
+  }
+  
+
+
+#fly-in div:nth-child(2) { animation-delay: 4s}
+#fly-in div:nth-child(3) { animation-delay: 8s}
+#fly-in div:nth-child(4) { animation-delay: 12s}
+
+
+@keyframes switch {
+    0% { opacity: 0;filter: blur(20px); transform:scale(4)}
+    3% { opacity: 1;filter: blur(0); transform:scale(1)}
+    10% { opacity: 1;filter: blur(0); transform:scale(.9)}
+    13% { opacity: 0;filter: blur(10px); transform:scale(.1)}
+    80% { opacity: 0}
+    100% { opacity: 0}
+}
+
       
+
+

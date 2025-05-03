@@ -139,7 +139,7 @@ const seatData = {
   "B": [
     { "start": 5, "count": 3, "y": 1961, "dy": 45.4, "x": 1251.9 },
     { "start": 8, "count": 10, "y": 1753, "dy": 45.4, "x": 1251.9 },
-    { "start": 18, "count": 9, "y": 1251, "dy": 45.4, "x": 1251.9 },
+    { "start": 19, "count": 9, "y": 1251, "dy": 45.4, "x": 1251.9 },
     { "start": 28, "count": 3, "y": 749, "dy": 45.4, "x": 1251.9 }
   ],
   "C": [
@@ -296,12 +296,29 @@ const seatData = {
 
 
 const studentToSeat = {
-  "123456": "A10",
-  "123457": "A11",
-  "123458": "B10"
+  "1301": "A08",
+  "1302": "A09",
+  "1303": "A10",
+  "1304": "A11",
+  "1305": "A12",
+  "1101": "A13",
+  "1102": "A14",
+  "1103": "A15",
+  "1104": "A16",
+  "1601": "A19",
+  "1602": "A20",
+  "1603": "A21",
+  "1604": "A22",
+  "1201": "A05",
+  "1202": "A06",
+  "1203": "A07",
+  "1401": "A23",
+  "1402": "A24",
+  "1403": "A25",
+  "1501": "A26",
 };
 
-const groups = [["123456", "123457", "123458"]];
+const groups = [['1101', '1102', '1103', '1104'], ['1201', '1202', '1203'], ['1301', '1302', '1303', '1304', '1305'], ['1401', '1402', '1403'], ['1501'], ['1601', '1602', '1603', '1604']];
 
 let highlightBox = null;
 let zoomedIn = true;
@@ -313,7 +330,7 @@ image.onload = () => {
   fullImageLoaded = true;
   minimap.width = 300;
   minimap.height = image.height / image.width * minimap.width;
-  drawSeats();
+    drawSeats();
 };
 
 minimap.addEventListener("click", () => {
@@ -338,20 +355,71 @@ function drawSeats(mySeat = null, groupSeats = []) {
   }
 
   highlightBox = highlight;
+  const ratio = window.devicePixelRatio || 1; // 追加: ディスプレイ解像度
+  
   const scale = (zoomedIn && highlightBox) ? zoomScale : 1;
 
+  ctx.imageSmoothingEnabled = true;
+  ctx.imageSmoothingQuality = 'high';
+  
   if (zoomedIn && highlightBox) {
     const sx = Math.max(0, highlightBox.x - zoomSize / 2);
     const sy = Math.max(0, highlightBox.y - zoomSize / 2);
-    canvas.width = zoomSize * zoomScale;
-    canvas.height = zoomSize * zoomScale;
-    ctx.drawImage(image, sx, sy, zoomSize, zoomSize, 0, 0, canvas.width, canvas.height);
+  
+    // キャンバスの内部サイズをratio倍
+    canvas.width = zoomSize * zoomScale * ratio;
+    canvas.height = zoomSize * zoomScale * ratio;
+  
+    // CSSの見た目サイズは変えない
+    canvas.style.width = (zoomSize * zoomScale) + "px";
+    canvas.style.height = (zoomSize * zoomScale) + "px";
+  
+    // スケール調整
+    ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
+  
+    ctx.drawImage(
+      image,
+      sx, sy, zoomSize, zoomSize, // 元画像から切り取る部分
+      0, 0, zoomSize * zoomScale, zoomSize * zoomScale // キャンバスに描くサイズ
+    );
+    
   } else {
-    canvas.width = image.width;
-    canvas.height = image.height;
-    ctx.drawImage(image, 0, 0);
-  }
+    //canvas.width = image.width;
+    //canvas.height = image.height;
+    //ctx.drawImage(image, 0, 0);
+  
+    const ratio = window.devicePixelRatio || 1;
 
+// 元画像サイズ（ピクセルベース）
+const baseW = image.width;
+const baseH = image.height;
+
+// 表示したい幅（スマホ画面に収める）
+const maxDisplayWidth = canvas.parentElement.clientWidth;
+const scale = maxDisplayWidth / baseW;
+
+// 表示上のサイズ
+const displayW = baseW * scale;
+const displayH = baseH * scale;
+
+// 内部ピクセルサイズ（くっきり描画）
+canvas.width = baseW * ratio;
+canvas.height = baseH * ratio;
+
+// 表示は画面に合わせて縮小（CSSだけで）
+canvas.style.width = displayW + "px";
+canvas.style.height = displayH + "px";
+
+// 高DPI対応スケール設定
+ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
+
+// 画像を「縮小せず」そのまま描画！
+ctx.imageSmoothingEnabled = false;
+ctx.drawImage(image, 0, 0); // 縮小なしでピクセル等倍
+
+    
+
+  } 
   
   for (const col in seatData) {
     for (const segment of seatData[col]) {
@@ -368,9 +436,6 @@ function drawSeats(mySeat = null, groupSeats = []) {
 
         ctx.beginPath();
         const size = 35 * scale; // 直径と同じサイズ
-
-        
-        
 
         if (label === mySeat) {
             ctx.shadowBlur = 15;
@@ -429,27 +494,10 @@ function highlightGroup() {
 
   output.innerHTML = `
     <strong>あなたの席:</strong> ${mySeat}<br>
-    <strong>グループのメンバーの席:</strong><br>
+    <strong>グループメンバーの席:</strong><br>
     <ul>
       ${groupInfo.map(g => `<li>${g.id} → ${g.seat}${g.id === inputId ? "（あなた）" : ""}</li>`).join("")}
     </ul>
   `;
 }
 
-
-let button = document.querySelector('.button');
-let buttonText = document.querySelector('.tick');
-
-const tickMark = "<svg width=\"58\" height=\"45\" viewBox=\"0 0 58 45\" xmlns=\"http://www.w3.org/2000/svg\"><path fill=\"#fff\" fill-rule=\"nonzero\" d=\"M19.11 44.64L.27 25.81l5.66-5.66 13.18 13.18L52.07.38l5.65 5.65\"/></svg>";
-
-buttonText.innerHTML = "Submit";
-
-button.addEventListener('click', function() {
-
-  if (buttonText.innerHTML !== "Submit") {
-    buttonText.innerHTML = "Submit";
-  } else if (buttonText.innerHTML === "Submit") {
-    buttonText.innerHTML = tickMark;
-  }
-  this.classList.toggle('button__circle');
-});

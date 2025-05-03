@@ -1,18 +1,27 @@
-// 正しいパスワード
-const correctPassword = "IS2025"; // ここに設定したいパスワードを入れる
+function checkPassword() {
+  const input = document.getElementById('authInput').value;
+  const message = document.getElementById('authMessage');
+  const correct = "1234"; // 任意のパスワード
 
-// フォームが送信されたときの処理
-document.getElementById("password-form").addEventListener("submit", function(event) {
-  event.preventDefault(); // フォームのデフォルト動作（送信）を防ぐ
-  
-  // 入力されたパスワードを取得
-  const enteredPassword = document.getElementById("password").value;
-
-  // パスワードが正しいかチェック
-  if (enteredPassword === correctPassword) {
-    alert("正しいパスワードです！アクセスできます。");
+  if (input === correct) {
+    message.textContent = "";
     window.location.href = "indextrue.html";
   } else {
-    alert("パスワードが間違っています。再度試してください。");
+    message.textContent = "パスワードが違います";
+    showErrorShake();
   }
-});
+}
+
+function showErrorShake() {
+  const auth = document.getElementById("authScreen");
+  auth.animate([
+    { transform: "translateX(0)" },
+    { transform: "translateX(-10px)" },
+    { transform: "translateX(10px)" },
+    { transform: "translateX(0)" }
+  ], {
+    duration: 300,
+    iterations: 1
+  });
+}
+
