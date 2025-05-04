@@ -192,10 +192,7 @@ html {
         font-size: 16px;
         color: rgb(0, 0, 0);
     }
-    #ul{
-        padding-top: 0px;
-        padding-bottom: 0px;
-      }
+    
       
     
     button {
@@ -235,12 +232,13 @@ html {
         animation: zoomIn 0.8s cubic-bezier(0.25, 1, 0.5, 1) forwards;
     }
     #te{text-align:left; font-size: 10px;color: white;}
+    
     #attentionScreen{
         text-align:left; font-size: 14px;
         line-height: 1.0;color: white;}
-    #formScreen{
-            text-align:left; font-size: 16px;
-            line-height: 1.0;color: white;}
+    #noticeScreen{
+            text-align:left; font-size: 13px;
+            line-height: 1.8;color: white;}
     #studentId {
         background: white;
         color:black;
@@ -356,17 +354,17 @@ html {
     margin: 0 auto;     /* 余裕を持って少し内側に */
     width: 100%;     /* スマホでも右に出ないように */
     opacity: 0;
-    animation: switch 20s linear infinite;
+    animation: switch 27.5s linear infinite;
     text-align: center;
     word-break: break-word; /* 長文でも折り返し */
   }
   
 
 
-#fly-in div:nth-child(2) { animation-delay: 4s}
-#fly-in div:nth-child(3) { animation-delay: 8s}
-#fly-in div:nth-child(4) { animation-delay: 12s}
-#fly-in div:nth-child(5) { animation-delay: 16s}
+#fly-in div:nth-child(2) { animation-delay: 5.5s}
+#fly-in div:nth-child(3) { animation-delay: 11s}
+#fly-in div:nth-child(4) { animation-delay: 16.5s}
+#fly-in div:nth-child(5) { animation-delay: 22s}
 
 
 @keyframes switch {
@@ -398,3 +396,7 @@ html {
     transform: translateY(0);
   }
 }
+
+
+
+

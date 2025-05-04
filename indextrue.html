@@ -51,7 +51,7 @@
   <div id="homeScreen">
     <p><img src="logo.png-removebg-preview.png" id="logo"alt="logo"></p>
     <p></p>
-    <button class="wave" onclick="goToformScreen()">申し込み</button>
+    <button class="wave" onclick="goTonoticeScreen()">申し込み</button>
     <button class="wave" onclick="goToViewer()">自分の席をチェック</button> 
     <button class="wave" onclick="goToAttentionScreen()">注意事項</button>
     <!-- これは今まで通り -->
@@ -95,7 +95,7 @@
     <button onclick="goHome()">ホームに戻る</button></p></div>
     <div id="output"></div>
     <canvas id="seatCanvas"></canvas>
-    
+
     <canvas id="minimap"></canvas>
   </div>
 
@@ -110,8 +110,41 @@
     <p>・会場内では、スタッフの指示に従うこと。</p>
     <p><button onclick="goHome()">ホームに戻る</button></p>
 </div>
+
+<div id="consentModal" class="hidden">
+  <div class="modal-content">
+    <h2>注意事項</h2>
+    <p>以下の内容を確認のうえ、回答に進んでください。</p>
+    <ul>
+    <li>重複応募はお控えください。重複したご応募が確認された場合、公平性の観点より、入場資格を無効とさせていただく場合がございます。</li>
+    
+    <li>お座席はグループ単位で抽選を行います。可能な限り配慮いたしますが、グループ全員が必ずしも近いお席になるとは限りません。あらかじめご了承いただけますようお願いいたします。</li>
+    
+    <li>本公演は全席指定となっております。応募期間を過ぎてからのお申し込みはできませんので、お忘れのないよう、余裕をもってご応募ください。</li>
+    
+    <li>原則、申し込み後のキャンセル、変更はお受けできません。送信前に今一度、内容をご確認ください。</li>
+    
+    <li>その他、ご不明な点がございましたら、運営委員会IS部署（生徒会室）までお問い合わせください。</li>
+  <style>
+  .modal-content {
+    background: white;
+    padding: 1em;
+    border-radius: 12px;
+    max-width: 90%;
+    box-shadow: 0 0 20px rgba(0,0,0,0.3);
+    text-align: left;
+    color: black;
+    font-size: 12px;
+  }</style>
+  </ul>
+    <p><label><input type="checkbox" id="consentCheckbox"> 同意します</label><br></p>
+    <button onclick="proceedIfAgreed()">進む</button><button onclick="goHome()">ホームに戻る</button>
+  </div>
+</div>
+
 <div id="formScreen" class="hidden">
   <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSeyNcvT0H7vYAGnbPIsaM_NsKXA1EugeslVmHinKDx7BTB76w/viewform?embedded=true" width=100% height="1788" frameborder="0" marginheight="0" marginwidth="0">読み込んでいます…</iframe>    
+  </iframe>
   <p><button onclick="goHome()">ホームに戻る</button></p>
 </div>
 

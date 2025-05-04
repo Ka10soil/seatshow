@@ -2,6 +2,8 @@ const homeScreen = document.getElementById("homeScreen");
 const viewerScreen = document.getElementById("viewerScreen");
 const attentionScreen = document.getElementById("attentionScreen");
 const formScreen = document.getElementById("formScreen");
+const noticeScreen = document.getElementById("noticeScreen");
+const consentModal = document.getElementById("consentModal");
 
 function goToViewer() {
   showScreenWithGlitch('viewerScreen');
@@ -11,6 +13,8 @@ function goToViewer() {
     document.getElementById('homeScreen').style.display = 'none';
     document.getElementById('formScreen').style.display = 'none';
     document.getElementById('attentionScreen').style.display = 'none';
+    document.getElementById('consentModal').style.display = 'none';
+    document.getElementById('formScreen').style.display = 'none';
     document.getElementById('viewerScreen').style.display = 'block';
     blackout.style.opacity = 0;
     blackout.style.pointerEvents = 'none';
@@ -29,6 +33,8 @@ function goToAttentionScreen() {
     document.getElementById('homeScreen').style.display = 'none';
     document.getElementById('formScreen').style.display = 'none';
     document.getElementById('viewerScreen').style.display = 'none';
+    document.getElementById('consentModal').style.display = 'none';
+    document.getElementById('formScreen').style.display = 'none';
     document.getElementById('attentionScreen').style.display = 'block';
     blackout.style.opacity = 0;
     blackout.style.pointerEvents = 'none';
@@ -39,15 +45,17 @@ function goToAttentionScreen() {
   drawSeats(currentSeat, currentGroup);
 }
 
-function goToformScreen() {
-  showScreenWithGlitch('formScreen')
+function goTonoticeScreen() {
+  showScreenWithGlitch('consentModal')
   blackout.style.pointerEvents = 'auto';
   blackout.style.opacity = 1;
   setTimeout(() => {
     document.getElementById('homeScreen').style.display = 'none';
     document.getElementById('attentionScreen').style.display = 'none';
     document.getElementById('viewerScreen').style.display = 'none';
-    document.getElementById('formScreen').style.display = 'block';
+    document.getElementById('consentModal').style.display = 'flex';
+    document.getElementById('formScreen').style.display = 'none';
+
     blackout.style.opacity = 0;
     blackout.style.pointerEvents = 'none';
   }, 500);
@@ -66,7 +74,26 @@ function goHome() {
     document.getElementById('formScreen').style.display = 'none';
     document.getElementById('attentionScreen').style.display = 'none';
     document.getElementById('viewerScreen').style.display = 'none';
+    document.getElementById('consentModal').style.display = 'none';
+    document.getElementById('formScreen').style.display = 'none';
     document.getElementById('homeScreen').style.display = 'block';
+    blackout.style.opacity = 0;
+    blackout.style.pointerEvents = 'none';
+  }, 500);
+
+  viewerScreen.classList.add("hidden");
+  homeScreen.classList.remove("hidden");
+}
+
+function goForm() {
+  blackout.style.pointerEvents = 'auto';
+  blackout.style.opacity = 1;
+  setTimeout(() => {
+    document.getElementById('homeScreen').style.display = 'none';
+    document.getElementById('attentionScreen').style.display = 'none';
+    document.getElementById('viewerScreen').style.display = 'none';
+    document.getElementById('formScreen').style.display = 'block';
+    document.getElementById('consentModal').style.display = 'block';
     blackout.style.opacity = 0;
     blackout.style.pointerEvents = 'none';
   }, 500);
@@ -559,3 +586,12 @@ function highlightGroup() {
   `;
 }
 
+function proceedIfAgreed() {
+  const checkbox = document.getElementById('consentCheckbox');
+  if (checkbox.checked) {
+    document.getElementById('consentModal').style.display = 'none';
+    document.getElementById('formScreen').style.display = 'block';
+  } else {
+    alert('同意にチェックを入れてください');
+  }
+}
