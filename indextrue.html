@@ -98,6 +98,8 @@
     <canvas id="seatCanvas"></canvas>
 
     <canvas id="minimap"></canvas>
+    <p id="te">自分の席は赤、グループメンバーの席は水色で表示されます</p>
+    <p id="te">ミニマップをクリックして拡大/通常表示を切り替え</p>
   </div>
 
 
@@ -139,15 +141,11 @@
   }</style>
   </ul>
     <p><label><input type="checkbox" id="consentCheckbox"> 確認しました</label><br></p>
-    <button onclick="proceedIfAgreed()">進む</button><button onclick="goHome()">ホームに戻る</button>
+    <button onclick="proceedIfAgreed()">フォームを開く</a>
+    </button><button onclick="goHome()">ホームに戻る</button>
   </div>
 </div>
 
-<div id="formScreen" class="hidden">
-  <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSeyNcvT0H7vYAGnbPIsaM_NsKXA1EugeslVmHinKDx7BTB76w/viewform?embedded=true" width=100% height="1788" frameborder="0" marginheight="0" marginwidth="0">読み込んでいます…</iframe>    
-  </iframe>
-  <p><button onclick="goHome()">ホームに戻る</button></p>
-</div>
 
 
   <script src="script.js"></script>

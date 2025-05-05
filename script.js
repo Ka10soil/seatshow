@@ -591,6 +591,7 @@ function proceedIfAgreed() {
   if (checkbox.checked) {
     document.getElementById('consentModal').style.display = 'none';
     document.getElementById('formScreen').style.display = 'block';
+    window.location.href="https://docs.google.com/forms/d/e/1FAIpQLSeyNcvT0H7vYAGnbPIsaM_NsKXA1EugeslVmHinKDx7BTB76w/viewform?embedded=true" 
   } else {
     alert('確認が完了していません');
   }
