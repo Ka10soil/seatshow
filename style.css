@@ -354,7 +354,7 @@ html {
     margin: 0 auto;     /* 余裕を持って少し内側に */
     width: 100%;     /* スマホでも右に出ないように */
     opacity: 0;
-    animation: switch 27.5s linear infinite;
+    animation: switch 33s linear infinite;
     text-align: center;
     word-break: break-word; /* 長文でも折り返し */
   }
@@ -365,6 +365,7 @@ html {
 #fly-in div:nth-child(3) { animation-delay: 11s}
 #fly-in div:nth-child(4) { animation-delay: 16.5s}
 #fly-in div:nth-child(5) { animation-delay: 22s}
+#fly-in div:nth-child(6) { animation-delay: 27.5s}
 
 
 @keyframes switch {

@@ -592,6 +592,6 @@ function proceedIfAgreed() {
     document.getElementById('consentModal').style.display = 'none';
     document.getElementById('formScreen').style.display = 'block';
   } else {
-    alert('同意にチェックを入れてください');
+    alert('確認が完了していません');
   }
 }

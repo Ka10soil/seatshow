@@ -63,12 +63,13 @@
       <div>Tips<span>自分の席は赤、グループメンバーの席は水色で表示されます </span></div>
       <div>Tips<span>ミニマップをクリックして拡大/通常表示を切り替えよう </span></div>
       <div><span>情報更新のタイミング等はISレターをチェック</span></div>
+      <div id="s-text"><text>test</text></div>
     </div>  
    
 
     <script>
-      // イベント日を設定（例：2025年5月18日）
-      const targetDate = new Date('2025-05-30');
+      // イベント日を設定
+      const targetDate = new Date('2025-05-31');
       const today = new Date();
       const diffTime = targetDate - today;
       const daysLeft = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
@@ -137,7 +138,7 @@
     font-size: 12px;
   }</style>
   </ul>
-    <p><label><input type="checkbox" id="consentCheckbox"> 同意します</label><br></p>
+    <p><label><input type="checkbox" id="consentCheckbox"> 確認しました</label><br></p>
     <button onclick="proceedIfAgreed()">進む</button><button onclick="goHome()">ホームに戻る</button>
   </div>
 </div>
