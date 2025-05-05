@@ -1,7 +1,7 @@
 const homeScreen = document.getElementById("homeScreen");
 const viewerScreen = document.getElementById("viewerScreen");
 const attentionScreen = document.getElementById("attentionScreen");
-const formScreen = document.getElementById("formScreen");
+
 const noticeScreen = document.getElementById("noticeScreen");
 const consentModal = document.getElementById("consentModal");
 
@@ -11,10 +11,10 @@ function goToViewer() {
   blackout.style.opacity = 1;
   setTimeout(() => {
     document.getElementById('homeScreen').style.display = 'none';
-    document.getElementById('formScreen').style.display = 'none';
+
     document.getElementById('attentionScreen').style.display = 'none';
     document.getElementById('consentModal').style.display = 'none';
-    document.getElementById('formScreen').style.display = 'none';
+  
     document.getElementById('viewerScreen').style.display = 'block';
     blackout.style.opacity = 0;
     blackout.style.pointerEvents = 'none';
@@ -31,10 +31,10 @@ function goToAttentionScreen() {
   blackout.style.opacity = 1;
   setTimeout(() => {
     document.getElementById('homeScreen').style.display = 'none';
-    document.getElementById('formScreen').style.display = 'none';
+
     document.getElementById('viewerScreen').style.display = 'none';
     document.getElementById('consentModal').style.display = 'none';
-    document.getElementById('formScreen').style.display = 'none';
+
     document.getElementById('attentionScreen').style.display = 'block';
     blackout.style.opacity = 0;
     blackout.style.pointerEvents = 'none';
@@ -54,7 +54,7 @@ function goTonoticeScreen() {
     document.getElementById('attentionScreen').style.display = 'none';
     document.getElementById('viewerScreen').style.display = 'none';
     document.getElementById('consentModal').style.display = 'flex';
-    document.getElementById('formScreen').style.display = 'none';
+  
 
     blackout.style.opacity = 0;
     blackout.style.pointerEvents = 'none';
@@ -71,11 +71,11 @@ function goHome() {
   blackout.style.pointerEvents = 'auto';
   blackout.style.opacity = 1;
   setTimeout(() => {
-    document.getElementById('formScreen').style.display = 'none';
+
     document.getElementById('attentionScreen').style.display = 'none';
     document.getElementById('viewerScreen').style.display = 'none';
     document.getElementById('consentModal').style.display = 'none';
-    document.getElementById('formScreen').style.display = 'none';
+ 
     document.getElementById('homeScreen').style.display = 'block';
     blackout.style.opacity = 0;
     blackout.style.pointerEvents = 'none';
@@ -92,7 +92,7 @@ function goForm() {
     document.getElementById('homeScreen').style.display = 'none';
     document.getElementById('attentionScreen').style.display = 'none';
     document.getElementById('viewerScreen').style.display = 'none';
-    document.getElementById('formScreen').style.display = 'block';
+
     document.getElementById('consentModal').style.display = 'block';
     blackout.style.opacity = 0;
     blackout.style.pointerEvents = 'none';
@@ -590,7 +590,6 @@ function proceedIfAgreed() {
   const checkbox = document.getElementById('consentCheckbox');
   if (checkbox.checked) {
     document.getElementById('consentModal').style.display = 'none';
-    document.getElementById('formScreen').style.display = 'block';
     window.location.href="https://docs.google.com/forms/d/e/1FAIpQLSeyNcvT0H7vYAGnbPIsaM_NsKXA1EugeslVmHinKDx7BTB76w/viewform?embedded=true" 
   } else {
     alert('確認が完了していません');
