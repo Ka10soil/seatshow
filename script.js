@@ -389,60 +389,7 @@ function drawSeats(mySeat = null, groupSeats = []) {
   ctx.imageSmoothingEnabled = true;
   ctx.imageSmoothingQuality = 'high';
   
-  function drawBaseImage(zoomedIn, highlightBox) {
-  const image = new Image();
-  image.src = "seatmap.png.jpg?t=" + Date.now(); // キャッシュ無効化
 
-  image.onload = () => {
-    const ratio = window.devicePixelRatio || 1;
-
-    if (zoomedIn && highlightBox) {
-      const sx = Math.max(0, highlightBox.x - zoomSize / 2);
-      const sy = Math.max(0, highlightBox.y - zoomSize / 2);
-
-      canvas.width = zoomSize * zoomScale * ratio;
-      canvas.height = zoomSize * zoomScale * ratio;
-
-      canvas.style.width = (zoomSize * zoomScale) + "px";
-      canvas.style.height = (zoomSize * zoomScale) + "px";
-
-      ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
-      ctx.imageSmoothingEnabled = false;
-
-      ctx.drawImage(
-        image,
-        sx, sy, zoomSize, zoomSize,
-        0, 0, zoomSize * zoomScale, zoomSize * zoomScale
-      );
-    } else {
-      const baseW = image.width;
-      const baseH = image.height;
-
-      const maxDisplayWidth = canvas.parentElement.clientWidth;
-      const scale = maxDisplayWidth / baseW;
-
-      const displayW = baseW * scale;
-      const displayH = baseH * scale;
-
-      canvas.width = baseW * ratio;
-      canvas.height = baseH * ratio;
-
-      canvas.style.width = displayW + "px";
-      canvas.style.height = displayH + "px";
-
-      ctx.setTransform(1, 0, 0, 1, 0, 0); // 念のためリセット
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-      ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
-      ctx.imageSmoothingEnabled = false;
-
-      ctx.drawImage(image, 0, 0);
-    }
-
-    // 必要に応じて drawSeats をここで呼び出す
-    drawSeats(ctx, seatData, groupData, selectedId, image, zoomedIn);
-  };
-}
 
   if (zoomedIn && highlightBox) {
     const sx = Math.max(0, highlightBox.x - zoomSize / 2);
@@ -480,11 +427,11 @@ const baseH = image.height;
 // 表示したい幅（スマホ画面に収める）
 const maxDisplayWidth = canvas.parentElement.clientWidth || window.innerWidth;
 
-const scale = maxDisplayWidth / baseW;
+const basescale = maxDisplayWidth / baseW;
 
 // 表示上のサイズ
-const displayW = baseW * scale;
-const displayH = baseH * scale;
+const displayW = baseW * basescale;
+const displayH = baseH * basescale;
 
 // 内部ピクセルサイズ（くっきり描画）
 canvas.width = baseW * ratio;
