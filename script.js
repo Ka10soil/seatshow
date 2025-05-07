@@ -30,7 +30,7 @@ function goToViewer() {
     drawSeats();
   };
   
-  image.src = "seatmap.png.jpg";
+  image.src = "seatmap.jpg";
   
   // すでに読み込まれていれば手動で呼び出す（ブラウザキャッシュ対策）
   if (image.complete) {
