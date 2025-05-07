@@ -22,7 +22,13 @@ function goToViewer() {
 
   homeScreen.classList.add("hidden");
   viewerScreen.classList.remove("hidden");
-  drawSeats(currentSeat, currentGroup);
+  image.src = "seatmap.png.jpg";
+  image.onload = () => {
+    fullImageLoaded = true;
+    minimap.width = 300;
+    minimap.height = image.height / image.width * minimap.width;
+      drawSeats();
+  };
 }
 
 function goToAttentionScreen() {
@@ -42,7 +48,7 @@ function goToAttentionScreen() {
 
   homeScreen.classList.add("hidden");
   viewerScreen.classList.remove("hidden");
-  drawSeats(currentSeat, currentGroup);
+
 }
 
 function goTonoticeScreen() {
@@ -62,7 +68,7 @@ function goTonoticeScreen() {
 
   homeScreen.classList.add("hidden");
   viewerScreen.classList.remove("hidden");
-  drawSeats(currentSeat, currentGroup);
+
 }
 
 
@@ -150,7 +156,7 @@ const minimap = document.getElementById("minimap");
 const mctx = minimap.getContext("2d");
 const output = document.getElementById("output");
 const image = new Image();
-image.src = "seatmap.png.jpg";
+
 
 const zoomSize = 550;
 const zoomScale = 0.55;
@@ -353,12 +359,7 @@ let fullImageLoaded = false;
 let currentSeat = null;
 let currentGroup = [];
 
-image.onload = () => {
-  fullImageLoaded = true;
-  minimap.width = 300;
-  minimap.height = image.height / image.width * minimap.width;
-    drawSeats();
-};
+
 
 minimap.addEventListener("click", () => {
   zoomedIn = !zoomedIn;
