@@ -22,13 +22,21 @@ function goToViewer() {
 
   homeScreen.classList.add("hidden");
   viewerScreen.classList.remove("hidden");
-  image.src = "seatmap.png.jpg";
+  
   image.onload = () => {
     fullImageLoaded = true;
     minimap.width = 300;
     minimap.height = image.height / image.width * minimap.width;
-      drawSeats();
+    drawSeats();
   };
+  
+  image.src = "seatmap.png.jpg";
+  
+  // すでに読み込まれていれば手動で呼び出す（ブラウザキャッシュ対策）
+  if (image.complete) {
+    image.onload();
+  }
+  
 }
 
 function goToAttentionScreen() {
