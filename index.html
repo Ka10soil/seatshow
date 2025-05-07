@@ -2,6 +2,57 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
+  <title>画像読み込みテスト</title>
+  <style>
+    canvas {
+      border: 1px solid #888;
+      width: 100%;
+      max-width: 600px;
+      height: auto;
+    }
+  </style>
+</head>
+<body>
+  <h2>画像読み込みテスト</h2>
+  <canvas id="canvas"></canvas>
+  <p id="status">読み込み中...</p>
+
+  <script>
+    const canvas = document.getElementById("canvas");
+    const ctx = canvas.getContext("2d");
+    const image = new Image();
+    const status = document.getElementById("status");
+
+    image.onload = () => {
+      status.textContent = "読み込み成功 ✅";
+      const ratio = window.devicePixelRatio || 1;
+      canvas.width = image.width * ratio;
+      canvas.height = image.height * ratio;
+      canvas.style.width = image.width + "px";
+      canvas.style.height = image.height + "px";
+      ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
+      ctx.drawImage(image, 0, 0);
+    };
+
+    image.onerror = () => {
+      status.textContent = "❌ 画像の読み込みに失敗しました";
+    };
+
+    image.src = "https://ka10soil.github.io/seatmap.jpg";
+
+    // キャッシュ済みの場合も対応
+    if (image.complete) {
+      image.onload();
+    }
+  </script>
+</body>
+</html>
+
+<!--
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="https://fonts.googleapis.com/css2?family=Mochiy+Pop+One&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="password.css">
