@@ -23,21 +23,21 @@ function goToViewer() {
   homeScreen.classList.add("hidden");
   viewerScreen.classList.remove("hidden");
   
-  image.onload = () => {
+
+  if (image.complete && image.naturalWidth !== 0) {
     fullImageLoaded = true;
+    drawSeats();
+  } else {
+    image.onload = () => {
+      fullImageLoaded = true;
     minimap.width = 300;
     minimap.height = image.height / image.width * minimap.width;
     drawSeats();
-  };
-  
-  image.src = "seatmap.jpg";
-  
-  // すでに読み込まれていれば手動で呼び出す（ブラウザキャッシュ対策）
-  if (image.complete) {
-    image.onload();
+    };
+    image.src = "seatmap.jpg"; // 一度だけ設定されるようにするとなおよし
   }
-  
 }
+
 
 function goToAttentionScreen() {
   showScreenWithGlitch('attentionScreen')
@@ -337,29 +337,14 @@ const seatData = {
 
 
 const studentToSeat = {
-  "3221": "A08",
+
   "7778": "A09",
   "7776": "A10",
   "7777": "A11",
-  "1305": "A12",
-  "1101": "A13",
-  "1102": "A14",
-  "1103": "A15",
-  "1104": "A16",
-  "1601": "A19",
-  "1602": "A20",
-  "1603": "A21",
-  "1604": "A22",
-  "1201": "A05",
-  "1202": "A06",
-  "1203": "A07",
-  "1401": "A23",
-  "1402": "A24",
-  "1403": "A25",
-  "1501": "A26",
+  
 };
 
-const groups = [['7776', '7777', '7778'], ['1201', '1202', '1203'], ['1301', '1302', '1303', '1304', '1305'], ['1401', '1402', '1403'], ['1501'], ['1601', '1602', '1603', '1604']];
+const groups = [['7776', '7777', '7778']];
 
 let highlightBox = null;
 let zoomedIn = true;
