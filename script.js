@@ -323,10 +323,10 @@ const seatData = {
 
 
 const studentToSeat = {
-  "1301": "A08",
-  "1302": "A09",
-  "1303": "A10",
-  "1304": "A11",
+  "3221": "A08",
+  "7778": "A09",
+  "7776": "A10",
+  "7777": "A11",
   "1305": "A12",
   "1101": "A13",
   "1102": "A14",
@@ -345,7 +345,7 @@ const studentToSeat = {
   "1501": "A26",
 };
 
-const groups = [['1101', '1102', '1103', '1104'], ['1201', '1202', '1203'], ['1301', '1302', '1303', '1304', '1305'], ['1401', '1402', '1403'], ['1501'], ['1601', '1602', '1603', '1604']];
+const groups = [['7776', '7777', '7778'], ['1201', '1202', '1203'], ['1301', '1302', '1303', '1304', '1305'], ['1401', '1402', '1403'], ['1501'], ['1601', '1602', '1603', '1604']];
 
 let highlightBox = null;
 let zoomedIn = true;
@@ -589,8 +589,8 @@ function highlightGroup() {
 function proceedIfAgreed() {
   const checkbox = document.getElementById('consentCheckbox');
   if (checkbox.checked) {
-    document.getElementById('consentModal').style.display = 'none';
-    window.location.href="https://docs.google.com/forms/d/e/1FAIpQLSeyNcvT0H7vYAGnbPIsaM_NsKXA1EugeslVmHinKDx7BTB76w/viewform?embedded=true" 
+    window.open("https://docs.google.com/forms/d/e/1FAIpQLSeyNcvT0H7vYAGnbPIsaM_NsKXA1EugeslVmHinKDx7BTB76w/viewform?embedded=true" )
+    goHome();
   } else {
     alert('確認が完了していません');
   }
