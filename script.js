@@ -408,40 +408,26 @@ function drawSeats(mySeat = null, groupSeats = []) {
     
     
   } else {
-    //canvas.width = image.width;
-    //canvas.height = image.height;
-    //ctx.drawImage(image, 0, 0);
+    const sx = Math.max(0, highlightBox.x - zoomSize / 2);
+    const sy = Math.max(0, highlightBox.y - zoomSize / 2);
   
-    const ratio = window.devicePixelRatio || 1;
-
-// 元画像サイズ（ピクセルベース）
-const baseW = image.width;
-const baseH = image.height;
-
-// 表示したい幅（スマホ画面に収める）
-const maxDisplayWidth = canvas.parentElement.clientWidth || window.innerWidth;
-
-const basescale = maxDisplayWidth / baseW;
-
-// 表示上のサイズ
-const displayW = baseW * basescale;
-const displayH = baseH * basescale;
-
-// 内部ピクセルサイズ（くっきり描画）
-canvas.width = baseW * ratio;
-canvas.height = baseH * ratio;
-
-// 表示は画面に合わせて縮小（CSSだけで）
-canvas.style.width = displayW + "px";
-canvas.style.height = displayH + "px";
-
-// 高DPI対応スケール設定
-ctx.resetTransform();
-ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
-
-// 画像を「縮小せず」そのまま描画！
-ctx.imageSmoothingEnabled = false;
-ctx.drawImage(image, 0, 0); // 縮小なしでピクセル等倍
+    // キャンバスの内部サイズをratio倍
+    canvas.width = zoomSize * zoomScale * ratio;
+    canvas.height = zoomSize * zoomScale * ratio;
+  
+    // CSSの見た目サイズは変えない
+    canvas.style.width = (zoomSize * zoomScale) + "px";
+    canvas.style.height = (zoomSize * zoomScale) + "px";
+  
+    // スケール調整
+    ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
+  
+    ctx.drawImage(
+      image,
+      sx, sy, zoomSize, zoomSize, // 元画像から切り取る部分
+      0, 0, zoomSize * zoomScale, zoomSize * zoomScale // キャンバスに描くサイズ
+    );
+    
 
     
 
