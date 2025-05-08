@@ -24,18 +24,8 @@ function goToViewer() {
   viewerScreen.classList.remove("hidden");
   
 
-  if (image.complete && image.naturalWidth !== 0) {
-    fullImageLoaded = true;
-    drawSeats();
-  } else {
-    image.onload = () => {
-      fullImageLoaded = true;
-    minimap.width = 300;
-    minimap.height = image.height / image.width * minimap.width;
-    drawSeats();
-    };
-    image.src = "seatmap.jpg"; // 一度だけ設定されるようにするとなおよし
-  }
+  image.src = "seatmap.jpg";
+ensureImageLoadedAndDraw();
 }
 
 
@@ -144,6 +134,17 @@ function showScreenWithGlitch(screenId) {
 
 const links = document.querySelectorAll('.fade-link');
 
+function ensureImageLoadedAndDraw() {
+  if (image.complete && image.naturalWidth !== 0) {
+    fullImageLoaded = true;
+    minimap.width = 300;
+    minimap.height = image.height / image.width * minimap.width;
+    drawSeats();
+  } else {
+    // まだ読み込み終わってないなら再試行
+    setTimeout(ensureImageLoadedAndDraw, 50);
+  }
+}
 
 links.forEach(link => {
   link.addEventListener('click', e => {
