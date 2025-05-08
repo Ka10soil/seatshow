@@ -97,9 +97,13 @@
     <p><button onclick="highlightGroup()">表示</button>
     <button onclick="goHome()">ホームに戻る</button></p></div>
     <div id="output"></div>
-    <canvas id="seatCanvas" ></canvas>
+    <div id="mapContainer" style="position: relative; display: inline-block;">
+      <img id="seatImage" src="seatmap.jpg" style="width: 100%; display: block;">
+      <canvas id="seatCanvas" style="position: absolute; top: 0; left: 0;"></canvas>
+    </div>
 
     <canvas id="minimap"></canvas>
+    <p></p>
     <p id="te">自分の席は赤、グループメンバーの席は水色で表示されます</p>
     <p id="te">ミニマップをクリックして拡大/通常表示を切り替え</p>
   </div>

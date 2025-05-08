@@ -162,7 +162,7 @@ const output = document.getElementById("output");
 const image = new Image();
 
 
-const zoomSize = 550;
+const zoomSize = 650;
 const zoomScale = 0.55;
 
 const ax = 1200
@@ -522,5 +522,43 @@ function proceedIfAgreed() {
     goHome();
   } else {
     alert('確認が完了していません');
+  }
+}
+
+function drawOverlay() {
+  const ctx = seatCanvas.getContext("2d");
+  ctx.clearRect(0, 0, seatCanvas.width, seatCanvas.height);
+
+  for (const col in seatData) {
+    for (const segment of seatData[col]) {
+      for (let i = 0; i < segment.count; i++) {
+        const seatNum = segment.start + i;
+        const label = `${col}${String(seatNum).padStart(2, '0')}`;
+        let x = segment.x;
+        let y = segment.y - segment.dy * i;
+
+        // 通常表示（ズームなし）を想定
+        const size = 35; // 等倍描画。CSSで拡大するならここはそのままでOK
+
+        ctx.beginPath();
+
+        if (label === mySeat) {
+          ctx.shadowBlur = 15;
+          ctx.shadowColor = "rgba(255, 0, 0, 0.8)";
+          ctx.strokeStyle = "rgba(242, 255, 0, 0.6)";
+          ctx.lineWidth = 4;
+          ctx.strokeRect(x - size / 2, y - size / 2, size, size);
+        } else {
+          ctx.shadowBlur = 0;
+          ctx.shadowColor = "transparent";
+        }
+
+        ctx.fillStyle = groupSeats.includes(label)
+          ? "rgba(100, 200, 255, 0.3)"
+          : (label === mySeat ? "rgba(190, 70, 255, 0.3)" : "rgba(22, 22, 62, 0)");
+
+        ctx.fillRect(x - size / 2, y - size / 2, size, size);
+      }
+    }
   }
 }
