@@ -416,8 +416,8 @@ function drawSeats(mySeat = null, groupSeats = []) {
     const ratio = window.devicePixelRatio || 1;
 
 // 元画像サイズ（ピクセルベース）
-const baseW = image.width;
-const baseH = image.height;
+const baseW = image.naturalWidth;
+const baseH = image.naturalHeight;
 
 // 表示したい幅（スマホ画面に収める）
 const maxDisplayWidth = canvas.parentElement.clientWidth || window.innerWidth;
