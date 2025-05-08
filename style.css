@@ -10,7 +10,7 @@ html {
 
 
         background: linear-gradient(45deg, black);
-         
+        background-attachment: fixed; 
         height:max-height;
         font-family: 'Noto Sans JP', sans-serif;
         padding: 20px; 
@@ -53,7 +53,7 @@ html {
       }
 
       .spotlight-bg1 {
-        
+        position: fixed;
         inset: 0;
         background: radial-gradient(circle at center, white 0%, transparent 10%);
         background-size: 400% 400%;
@@ -65,7 +65,7 @@ html {
         animation: move1 5s linear infinite;
       }
       .spotlight-bg2 {
-        
+        position: fixed;
         inset: 0;
         background: radial-gradient(circle at center, rgb(255, 94, 226) 0%, transparent 10%);
         background-size: 400% 400%;
@@ -77,7 +77,7 @@ html {
         animation: move2 6s linear infinite;
       }
       .spotlight-bg3 {
-       
+        position: fixed;
         inset: 0;
         background: radial-gradient(circle at center, rgb(154, 100, 255) 0%, transparent 10%);
         background-size: 400% 400%;
@@ -89,7 +89,7 @@ html {
        animation: move3 7s linear infinite;
       }
       .spotlight-bg4 {
-       
+        position: fixed;
         inset: 0;
         background: radial-gradient(circle at center, rgb(148, 99, 255) 0%, transparent 10%);
         background-size: 400% 400%;
@@ -101,7 +101,7 @@ html {
         animation: move4 7s linear infinite;
       }
       .spotlight-bg5 {
-       
+        position: fixed;
         inset: 0;
         background: radial-gradient(circle at center, rgb(255, 255, 255) 0%, transparent 10%);
         background-size: 400% 400%;
@@ -113,7 +113,7 @@ html {
         animation: move2 6s linear infinite;
       }
       .spotlight-bg6 {
-       
+        position: fixed;
         inset: 0;
         background: radial-gradient(circle at center, rgb(255, 97, 200) 0%, transparent 10%);
         background-size: 400% 400%;

@@ -139,7 +139,10 @@ function ensureImageLoadedAndDraw() {
     fullImageLoaded = true;
     minimap.width = 300;
     minimap.height = image.height / image.width * minimap.width;
-    drawSeats();
+    setTimeout(() => {
+      drawSeats();
+    }, 500);
+    
   } else {
     // まだ読み込み終わってないなら再試行
     setTimeout(ensureImageLoadedAndDraw, 50);
