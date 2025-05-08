@@ -429,7 +429,7 @@ canvas.height = baseH * ratio;
 ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
 
 // 画像描画（切り出しなし）
-//ctx.imageSmoothingEnabled = false;
+ctx.imageSmoothingEnabled = false;
 ctx.drawImage(
   image,
   0, 0, baseW, baseH,  // 元画像の全体を
