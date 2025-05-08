@@ -409,45 +409,34 @@ function drawSeats(mySeat = null, groupSeats = []) {
     
     
   } else {
-    //canvas.width = image.width;
-    //canvas.height = image.height;
-    //ctx.drawImage(image, 0, 0);
-  
+    const baseW = image.naturalWidth;
+    const baseH = image.naturalHeight;
+    
     const ratio = window.devicePixelRatio || 1;
-
-// 元画像サイズ（ピクセルベース）
-const baseW = image.naturalWidth;
-const baseH = image.naturalHeight;
-
-// 表示したい幅（スマホ画面に収める）
-const maxDisplayWidth = canvas.parentElement.clientWidth || window.innerWidth;
-
-const basescale = maxDisplayWidth / baseW;
-
-// 表示上のサイズ
-const displayW = baseW * basescale;
-const displayH = baseH * basescale;
-
-// 内部ピクセルサイズ（くっきり描画）
-canvas.width = baseW * ratio;
-canvas.height = baseH * ratio;
-
-// 表示は画面に合わせて縮小（CSSだけで）
-canvas.style.width = displayW + "px";
-canvas.style.height = displayH + "px";
-
-// 高DPI対応スケール設定
-ctx.resetTransform();
-ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
-
-// 画像を「縮小せず」そのまま描画！
-ctx.imageSmoothingEnabled = false;
-ctx.drawImage(
-  image,
-  0, 0, baseW, baseH, // 元画像からの切り出し範囲
-  0, 0, baseW, baseH  // キャンバス上の描画位置とサイズ
-);
-
+    
+    // スマホ画面の幅に合わせて表示サイズを決める
+    const maxDisplayWidth = canvas.parentElement.clientWidth || window.innerWidth;
+    const scale = maxDisplayWidth / baseW;
+    
+    // CSSの見た目サイズ（ディスプレイ用）
+    canvas.style.width = (baseW * scale) + "px";
+    canvas.style.height = (baseH * scale) + "px";
+    
+    // 内部ピクセルサイズを ratio 倍
+    canvas.width = baseW * ratio;
+    canvas.height = baseH * ratio;
+    
+    // 高DPI対応で拡大描画
+    ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
+    
+    // 画像描画（切り出しなし）
+    ctx.imageSmoothingEnabled = false;
+    ctx.drawImage(
+      image,
+      0, 0, baseW, baseH,  // 元画像の全体を
+      0, 0, baseW, baseH   // キャンバスにも等倍で描画
+    );
+    
     
 
   } 
