@@ -25,7 +25,13 @@ function goToViewer() {
   
 
   image.src = "seatmap.jpg";
-ensureImageLoadedAndDraw();
+  
+  setTimeout(() => {
+    fullImageLoaded = true;
+    minimap.width = 300;
+    minimap.height = image.height / image.width * minimap.width;
+    drawSeats();
+  }, 1000);
 }
 
 
@@ -134,20 +140,6 @@ function showScreenWithGlitch(screenId) {
 
 const links = document.querySelectorAll('.fade-link');
 
-function ensureImageLoadedAndDraw() {
-  if (image.complete && image.naturalWidth !== 0) {
-    fullImageLoaded = true;
-    minimap.width = 300;
-    minimap.height = image.height / image.width * minimap.width;
-    setTimeout(() => {
-      drawSeats();
-    }, 500);
-    
-  } else {
-    // まだ読み込み終わってないなら再試行
-    setTimeout(ensureImageLoadedAndDraw, 50);
-  }
-}
 
 links.forEach(link => {
   link.addEventListener('click', e => {
