@@ -414,8 +414,8 @@ const baseH = image.naturalHeight;
 
 
 // スマホ画面の幅に合わせて表示サイズを決める
-//const maxDisplayWidth = canvas.parentElement.clientWidth || window.innerWidth;
-//const scale = maxDisplayWidth / baseW;
+const maxDisplayWidth = canvas.parentElement.clientWidth || window.innerWidth;
+const scale = maxDisplayWidth / baseW;
 
 // CSSの見た目サイズ（ディスプレイ用）
 canvas.style.width = (baseW * scale) + "px";
@@ -429,7 +429,7 @@ canvas.height = baseH * ratio;
 ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
 
 // 画像描画（切り出しなし）
-ctx.imageSmoothingEnabled = false;
+//ctx.imageSmoothingEnabled = false;
 ctx.drawImage(
   image,
   0, 0, baseW, baseH,  // 元画像の全体を
