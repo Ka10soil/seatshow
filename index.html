@@ -1,4 +1,74 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>画像読み込みデバッグ</title>
+</head>
+<body>
+  <canvas id="canvas" style="border: 1px solid gray;"></canvas>
+  <div id="log" style="white-space: pre; font-family: monospace; font-size: 14px; background: #f0f0f0; padding: 1em;"></div>
 
+  <script>
+    const canvas = document.getElementById("canvas");
+    const ctx = canvas.getContext("2d");
+    const logDiv = document.getElementById("log");
+
+    const image = new Image();
+    image.src = "seatmap.jpg";
+
+    function log(message) {
+      console.log(message);
+      logDiv.textContent += message + "\n";
+    }
+
+    log("ステップ0: スクリプト開始");
+    log(`UserAgent: ${navigator.userAgent}`);
+
+    image.onload = () => {
+      log("ステップ1: image.onload 発火");
+      log(`画像の naturalWidth: ${image.naturalWidth}, naturalHeight: ${image.naturalHeight}`);
+
+      if (image.naturalWidth === 0 || image.naturalHeight === 0) {
+        log("エラー: image.naturalWidth または naturalHeight が 0");
+        return;
+      }
+
+      const ratio = window.devicePixelRatio || 1;
+      canvas.width = image.naturalWidth * ratio;
+      canvas.height = image.naturalHeight * ratio;
+
+      canvas.style.width = image.naturalWidth + "px";
+      canvas.style.height = image.naturalHeight + "px";
+
+      ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
+      ctx.imageSmoothingEnabled = false;
+
+      try {
+        ctx.drawImage(image, 0, 0, image.naturalWidth, image.naturalHeight,
+                      0, 0, image.naturalWidth, image.naturalHeight);
+        log("ステップ2: drawImage 実行完了");
+      } catch (e) {
+        log("エラー: drawImage 失敗 -> " + e.message);
+      }
+    };
+
+    image.onerror = () => {
+      log("エラー: image の読み込みに失敗しました");
+    };
+
+    setTimeout(() => {
+      if (!image.complete) {
+        log("タイムアウト: image.complete が false のまま");
+      }
+    }, 5000);
+  </script>
+</body>
+</html>
+
+
+
+
+<!---
 <!DOCTYPE html>
 <html lang="ja">
 <head>
