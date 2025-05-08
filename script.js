@@ -409,32 +409,9 @@ function drawSeats(mySeat = null, groupSeats = []) {
     
     
   } else {
-   const baseW = image.naturalWidth;
-const baseH = image.naturalHeight;
-
-
-// スマホ画面の幅に合わせて表示サイズを決める
-const maxDisplayWidth = canvas.parentElement.clientWidth || window.innerWidth;
-const scale = maxDisplayWidth / baseW;
-
-// CSSの見た目サイズ（ディスプレイ用）
-canvas.style.width = (baseW * scale) + "px";
-canvas.style.height = (baseH * scale) + "px";
-
-// 内部ピクセルサイズを ratio 倍
-canvas.width = baseW * ratio;
-canvas.height = baseH * ratio;
-
-// 高DPI対応で拡大描画
-ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
-
-// 画像描画（切り出しなし）
-ctx.imageSmoothingEnabled = false;
-ctx.drawImage(
-  image,
-  0, 0, baseW, baseH,  // 元画像の全体を
-  0, 0, baseW, baseH   // キャンバスにも等倍で描画
-);
+    canvas.width = image.width;
+    canvas.height = image.height;
+    ctx.drawImage(image, 0, 0);
 
     
 
