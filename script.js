@@ -5,6 +5,10 @@ const attentionScreen = document.getElementById("attentionScreen");
 const noticeScreen = document.getElementById("noticeScreen");
 const consentModal = document.getElementById("consentModal");
 
+window.addEventListener("resize", () => {
+  redrawAll(); // これで描き直すだけにする
+});
+
 function goToViewer() {
   showScreenWithGlitch('viewerScreen');
   blackout.style.pointerEvents = 'auto';
@@ -506,6 +510,14 @@ function highlightGroup() {
 
   drawSeats(currentSeat, currentGroup);
 
+  groupInfo.sort((a, b) => {
+    const [aCol, aRow] = [a.seat[0], parseInt(a.seat.slice(1))];
+    const [bCol, bRow] = [b.seat[0], parseInt(b.seat.slice(1))];
+  
+    if (aCol !== bCol) return bCol.localeCompare(aCol); // 列を逆順
+    return bRow - aRow; // 数字を逆順
+  });
+  
   output.innerHTML = `
     <strong>あなたの席:</strong> ${mySeat}<br>
     <strong>グループメンバーの席:</strong><br>
@@ -513,6 +525,7 @@ function highlightGroup() {
       ${groupInfo.map(g => `<li>${g.id} → ${g.seat}${g.id === inputId ? "（あなた）" : ""}</li>`).join("")}
     </ul>
   `;
+  
 }
 
 function proceedIfAgreed() {
