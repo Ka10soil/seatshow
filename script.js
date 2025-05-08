@@ -5,6 +5,11 @@ const attentionScreen = document.getElementById("attentionScreen");
 const noticeScreen = document.getElementById("noticeScreen");
 const consentModal = document.getElementById("consentModal");
 
+window.onbeforeunload = function () {
+  return "リロード禁止です！";
+};
+
+
 function goToViewer() {
   showScreenWithGlitch('viewerScreen');
   blackout.style.pointerEvents = 'auto';
