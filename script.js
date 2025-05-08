@@ -409,14 +409,13 @@ function drawSeats(mySeat = null, groupSeats = []) {
     
     
   } else {
-   const baseW = 3509;
-const baseH = 2480;
+   const baseW = image.naturalWidth;
+const baseH = image.naturalHeight;
 
-const ratio = window.devicePixelRatio || 1;
 
 // スマホ画面の幅に合わせて表示サイズを決める
-const maxDisplayWidth = canvas.parentElement.clientWidth || window.innerWidth;
-const scale = maxDisplayWidth / baseW;
+//const maxDisplayWidth = canvas.parentElement.clientWidth || window.innerWidth;
+//const scale = maxDisplayWidth / baseW;
 
 // CSSの見た目サイズ（ディスプレイ用）
 canvas.style.width = (baseW * scale) + "px";
