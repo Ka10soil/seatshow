@@ -332,6 +332,7 @@ function drawSeats(mySeat = null, groupSeats = []) {
       ctx.drawImage(image, 0, 0, baseW, baseH, 0, 0, baseW * initialScale, baseH * initialScale);
     };
     image.src = "seatmap.jpg";
+    
 //
   // const baseW = image.naturalWidth;
 //const baseH = image.naturalHeight;
