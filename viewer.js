@@ -272,6 +272,11 @@ minimap.addEventListener("click", () => {
 
 function drawSeats(mySeat = null, groupSeats = []) {
   if (!fullImageLoaded) return;
+  let logOutput = "";
+
+  logOutput += "drawSeats called with mySeat: " + mySeat + "\n";
+  logOutput += "zoomedIn: " + zoomedIn + ", highlightBox: " + JSON.stringify(highlightBox) + "\n";
+
 
   let highlight = null;
   for (const col in seatData) {
@@ -288,7 +293,8 @@ function drawSeats(mySeat = null, groupSeats = []) {
 
   highlightBox = highlight;
   const ratio = window.devicePixelRatio || 1; // 追加: ディスプレイ解像度
-  
+  logOutput += "devicePixelRatio: " + ratio + "\n";
+
   const scale = (zoomedIn && highlightBox) ? zoomScale : 1;
 
   ctx.imageSmoothingEnabled = true;
@@ -297,6 +303,7 @@ function drawSeats(mySeat = null, groupSeats = []) {
 
 
   if (zoomedIn && highlightBox) {
+    logOutput += "Drawing zoomed in\n";
     const sx = Math.max(0, highlightBox.x - zoomSize / 2);
     const sy = Math.max(0, highlightBox.y - zoomSize / 2);
   
@@ -321,11 +328,18 @@ function drawSeats(mySeat = null, groupSeats = []) {
   } else {
    const baseW = image.naturalWidth;
 const baseH = image.naturalHeight;
+logOutput += "baseW: " + baseW + ", baseH: " + baseH + "\n";
 
 
 // スマホ画面の幅に合わせて表示サイズを決める
 const maxDisplayWidth = canvas.parentElement.clientWidth || window.innerWidth;
 const scale = maxDisplayWidth / baseW;
+    const initialScale = maxDisplayWidth / baseW;
+    logOutput += "Drawing normally - maxDisplayWidth: " + maxDisplayWidth + ", initialScale: " + initialScale + "\n";
+    logOutput += "Canvas width: " + canvas.width + ", height: " + canvas.height + "\n";
+    const transform = ctx.getTransform();
+    logOutput += "Current transform: " + JSON.stringify(transform) + "\n";
+
 
 // CSSの見た目サイズ（ディスプレイ用）
 canvas.style.width = (baseW * scale) + "px";
@@ -367,6 +381,7 @@ ctx.drawImage(
         const size = 35 * scale; // 直径と同じサイズ
 
         if (label === mySeat) {
+          logOutput += "Highlight for " + label + " at x: " + (segment.x * (zoomedIn && highlightBox ? zoomScale : (canvas.width / baseW))) + ", y: " + ((segment.y - segment.dy * i) * (zoomedIn && highlightBox ? zoomScale : (canvas.height / baseH))) + "\n";
             ctx.shadowBlur = 15;
             ctx.shadowColor = "rgba(255, 0, 0, 0.8)";
             ctx.strokeStyle = "rgb(242, 255, 0, 0.6)";
@@ -399,6 +414,9 @@ ctx.drawImage(
       zoomSize * s
     );
   }
+
+  const shareText = encodeURIComponent(logOutput);
+  window.location.href = "share://?text=" + shareText;
 }
 
 function highlightGroup() {
@@ -407,6 +425,9 @@ function highlightGroup() {
   if (!mySeat) {
     currentSeat = null;
     currentGroup = [];
+    output.innerHTML = "<strong>エラー:</strong> HRNOが登録されていません。";
+    const shareText = encodeURIComponent("Error: HRNO not found.");
+    window.location.href = "share://?text=" + shareText;
     output.innerHTML = "<strong>エラー:</strong> HRNOが登録されていません。";
     drawSeats();
     return;
