@@ -319,20 +319,21 @@ function drawSeats(mySeat = null, groupSeats = []) {
     
     
   } else {
-    const image = new Image();
-    image.onload = function() {
-      const baseW = image.naturalWidth;
-      const baseH = image.naturalHeight;
-      const maxDisplayWidth = canvas.parentElement.clientWidth || window.innerWidth;
-      const initialScale = maxDisplayWidth / baseW;
-      canvas.width = baseW * initialScale * (window.devicePixelRatio || 1);
-      canvas.height = baseH * initialScale * (window.devicePixelRatio || 1);
-      canvas.style.width = (baseW * initialScale) + "px";
-      canvas.style.height = (baseH * initialScale) + "px";
-      ctx.drawImage(image, 0, 0, baseW, baseH, 0, 0, baseW * initialScale, baseH * initialScale);
-    };
-    image.src = "seatmap.jpg";
-    
+    const ratio = window.devicePixelRatio || 1;
+  const scale = 1; // 一旦スケールは1で固定
+  const size = 50 * scale; // ハイライトのサイズ
+
+  // 仮のハイライト座標 (画面中央あたり)
+  const centerX = canvas.width / 2;
+  const centerY = canvas.height / 2;
+
+  ctx.beginPath();
+  ctx.strokeStyle = "blue"; // 青い枠線
+  ctx.lineWidth = 5;
+  ctx.strokeRect(centerX - size / 2, centerY - size / 2, size, size);
+
+  ctx.fillStyle = "lightblue"; // 薄い青で塗りつぶし
+  ctx.fillRect(centerX - size / 2, centerY - size / 2, size, size);
 //
   // const baseW = image.naturalWidth;
 //const baseH = image.naturalHeight;
