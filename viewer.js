@@ -319,8 +319,19 @@ function drawSeats(mySeat = null, groupSeats = []) {
     
     
   } else {
-    ctx.fillStyle = "red"; // 塗りつぶす色を赤に設定
-  ctx.fillRect(0, 0, canvas.width, canvas.height);
+    const image = new Image();
+    image.onload = function() {
+      const baseW = image.naturalWidth;
+      const baseH = image.naturalHeight;
+      const maxDisplayWidth = canvas.parentElement.clientWidth || window.innerWidth;
+      const initialScale = maxDisplayWidth / baseW;
+      canvas.width = baseW * initialScale * (window.devicePixelRatio || 1);
+      canvas.height = baseH * initialScale * (window.devicePixelRatio || 1);
+      canvas.style.width = (baseW * initialScale) + "px";
+      canvas.style.height = (baseH * initialScale) + "px";
+      ctx.drawImage(image, 0, 0, baseW, baseH, 0, 0, baseW * initialScale, baseH * initialScale);
+    };
+    image.src = "seatmap.jpg";
 //
   // const baseW = image.naturalWidth;
 //const baseH = image.naturalHeight;
