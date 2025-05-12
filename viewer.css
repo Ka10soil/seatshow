@@ -1,0 +1,121 @@
+html {
+  
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
+  body {
+    max-width: 600px;  /* スマホっぽい幅に制限 */
+    margin: 0 auto;    /* 中央寄せ */
+
+
+        background: linear-gradient(45deg, black);
+        background-attachment: fixed; 
+        height:max-height;
+        font-family: 'Noto Sans JP', sans-serif;
+        padding: 20px; 
+        text-align: center;
+    }
+    
+      
+
+      
+
+    .hidden { display: none; }
+    .content {
+        position: relative;
+        z-index: 1;
+      }
+    
+    canvas {
+        border: 1px solid #ccc; 
+        margin-top: 20px; 
+        max-width: 100%; 
+    }
+    #output {
+        background: rgb(0, 0, 0, 0);
+        padding: 10px; 
+        border: 1px solid #ccc; 
+        text-align: left; 
+        max-width: 100%; 
+        font-size: 14px;
+        color: rgb(255, 255, 255);
+    }
+    #minimap {
+        position: absolute; 
+        top: 6px; 
+        right: 2px; 
+        border: 1px solid #999; 
+        width: 140px; 
+        cursor: pointer; 
+    }
+    #blackout {
+        position: fixed;
+        inset: 0;
+        background: black;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.5s;
+        z-index: 10000;
+    }
+    #password {
+        margin-top: 20px;
+        padding: 10px; 
+        max-width: 80%; 
+        margin: auto;
+        font-size: 16px;
+        color: rgb(0, 0, 0);
+    }
+    
+      
+    
+    button {
+        background: linear-gradient(45deg, #00FFFF, #FF059A);
+        color: white;
+        text-shadow:
+        -1px -1px 0 black,
+        0px -1px 0 black,
+        2px -1px 0 black,
+        -1px  0px 0 black,
+        1px  0px 0 black,
+        -1px  1px 0 black,
+        0px  1px 0 black,
+        1px  1px 0 black;
+        border: none;
+        border-radius: 30px;
+        padding: 6px 10px;
+        font-size: 13px;
+        font-weight: bolder;
+        cursor: pointer;
+        transition: transform 0.1s ease, box-shadow 0.1s ease;
+        box-shadow: 0 3px rgb(100, 100, 100);
+        margin:2px;
+        }
+        button:active {
+        transform: translateY(4px);
+        box-shadow: 0 1px rgb(100, 100, 100);
+      }
+      .wave{
+        animation: poyoyon3 2s ease 0s infinite alternate forwards running;
+      }
+      
+    
+    #te{text-align:left; font-size: 10px;color: white;}
+    
+    
+    #studentId {
+        background: white;
+        color:black;
+        border: 2px solid #ccc;
+        border-radius: 12px;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+        padding: 6px;
+        font-size: 10px;
+    }
+    .seatmap.png.jp{
+        filter: invert(100%);
+    }
+    
+    
+    
+

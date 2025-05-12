@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="dark light">
+    <meta name="theme-color" content="#000000">
+    <title>座席表示</title>
+  
+    <style>
+      body {
+        background-color: #000000;
+        color: #ffffff;
+      }
+  
+      @media (prefers-color-scheme: dark) {
+        body {
+          background-color: #000000;
+          color: #ffffff;
+        }
+      }
+  
+      @media (prefers-color-scheme: light) {
+        body {
+          background-color: #000000;
+          color: #ffffff;
+        }
+      }
+    </style>
+  
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="viewer.css">
+</head>
+
+
+<body>
+
+  <div id="blackout"></div>
+  <div id="glitch"></div>
+
+ 
+
+
+  <div class="content">
+  <div id="homeScreen">
+  
+   
+    <p>現在表示される座席はサンプルとなります</p>
+
+    <button class="wave" onclick="goToViewer()">自分の席をチェック</button> 
+  
+    
+    </div>  
+   
+
+  </div>
+
+  <div id="viewerScreen" class="hidden">
+    <div id="te"><h1>座席ビューア</h1>
+    <p>HRNOを入力して座席を確認</p>
+    <p>現在入力されているデータはテスト用です</p>
+    <input type="text" id="studentId" placeholder="HRNO" />
+    
+    
+    <p><button onclick="highlightGroup()">表示</button>
+    <button onclick="goHome()">ホームに戻る</button></p></div>
+    <div id="output"></div>
+    <div id="mapContainer" style="position: relative; display: inline-block;">
+      <img id="seatImage" src="seatmap.jpg" style="width: 100%; display: block;">
+      <canvas id="seatCanvas" style="position: absolute; top: 0; left: 0;"></canvas>
+    </div>
+
+    <canvas id="minimap"></canvas>
+    <p></p>
+    <p id="te">自分の席は赤、グループメンバーの席は水色で表示されます</p>
+    <p id="te">ミニマップをクリックして拡大/通常表示を切り替え</p>
+  </div>
+
+
+  <script src="viewer.js"></script>
+</div>
+
+</body>
+</html>

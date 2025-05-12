@@ -10,85 +10,36 @@ window.addEventListener("resize", () => {
 });
 
 function goToViewer() {
-  window.location.href = "viewer.html";
-}
-
-
-function goToAttentionScreen() {
-  showScreenWithGlitch('attentionScreen')
+  showScreenWithGlitch('viewerScreen');
   blackout.style.pointerEvents = 'auto';
   blackout.style.opacity = 1;
   setTimeout(() => {
     document.getElementById('homeScreen').style.display = 'none';
 
-    document.getElementById('viewerScreen').style.display = 'none';
-    document.getElementById('consentModal').style.display = 'none';
-
-    document.getElementById('attentionScreen').style.display = 'block';
+    
+    document.getElementById('viewerScreen').style.display = 'block';
     blackout.style.opacity = 0;
     blackout.style.pointerEvents = 'none';
   }, 500);
 
   homeScreen.classList.add("hidden");
   viewerScreen.classList.remove("hidden");
-
-}
-
-function goTonoticeScreen() {
-  showScreenWithGlitch('consentModal')
-  blackout.style.pointerEvents = 'auto';
-  blackout.style.opacity = 1;
-  setTimeout(() => {
-    document.getElementById('homeScreen').style.display = 'none';
-    document.getElementById('attentionScreen').style.display = 'none';
-    document.getElementById('viewerScreen').style.display = 'none';
-    document.getElementById('consentModal').style.display = 'flex';
   
 
-    blackout.style.opacity = 0;
-    blackout.style.pointerEvents = 'none';
+  image.src = "seatmap.jpg";
+  
+  setTimeout(() => {
+    fullImageLoaded = true;
+    minimap.width = 300;
+    minimap.height = image.height / image.width * minimap.width;
+    drawSeats();
   }, 500);
-
-  homeScreen.classList.add("hidden");
-  viewerScreen.classList.remove("hidden");
-
 }
+
 
 
 function goHome() {
-  showScreenWithGlitch('homeScreen')
-  blackout.style.pointerEvents = 'auto';
-  blackout.style.opacity = 1;
-  setTimeout(() => {
-
-    document.getElementById('attentionScreen').style.display = 'none';
-    document.getElementById('viewerScreen').style.display = 'none';
-    document.getElementById('consentModal').style.display = 'none';
- 
-    document.getElementById('homeScreen').style.display = 'block';
-    blackout.style.opacity = 0;
-    blackout.style.pointerEvents = 'none';
-  }, 500);
-
-  viewerScreen.classList.add("hidden");
-  homeScreen.classList.remove("hidden");
-}
-
-function goForm() {
-  blackout.style.pointerEvents = 'auto';
-  blackout.style.opacity = 1;
-  setTimeout(() => {
-    document.getElementById('homeScreen').style.display = 'none';
-    document.getElementById('attentionScreen').style.display = 'none';
-    document.getElementById('viewerScreen').style.display = 'none';
-
-    document.getElementById('consentModal').style.display = 'block';
-    blackout.style.opacity = 0;
-    blackout.style.pointerEvents = 'none';
-  }, 500);
-
-  viewerScreen.classList.add("hidden");
-  homeScreen.classList.remove("hidden");
+  window.location.href = "indextrue.html";
 }
 
 const blackout = document.getElementById('blackout');
@@ -117,21 +68,6 @@ function showScreenWithGlitch(screenId) {
 }
 
 
-const links = document.querySelectorAll('.fade-link');
-
-
-links.forEach(link => {
-  link.addEventListener('click', e => {
-    e.preventDefault();
-    blackout.style.opacity = 1;
-
-    blackout.style.pointerEvents = 'auto';
-
-    setTimeout(() => {
-      window.location.href = link.href;
-    }, 500);
-  });
-});
 
 const canvas = document.getElementById("seatCanvas");
 const ctx = canvas.getContext("2d");
@@ -409,7 +345,11 @@ ctx.drawImage(
   0, 0, baseW, baseH,  // 元画像の全体を
   0, 0, baseW, baseH   // キャンバスにも等倍で描画
 );
-} 
+
+    
+
+  } 
+  
   for (const col in seatData) {
     for (const segment of seatData[col]) {
       for (let i = 0; i < segment.count; i++) {
@@ -497,16 +437,6 @@ function highlightGroup() {
     </ul>
   `;
   
-}
-
-function proceedIfAgreed() {
-  const checkbox = document.getElementById('consentCheckbox');
-  if (checkbox.checked) {
-    window.open("https://docs.google.com/forms/d/e/1FAIpQLSeyNcvT0H7vYAGnbPIsaM_NsKXA1EugeslVmHinKDx7BTB76w/viewform?embedded=true" )
-    goHome();
-  } else {
-    alert('確認が完了していません');
-  }
 }
 
 function drawOverlay() {
