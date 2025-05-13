@@ -319,48 +319,33 @@ function drawSeats(mySeat = null, groupSeats = []) {
     
     
   } else {
-    const ratio = window.devicePixelRatio || 1;
-  const scale = 1; // 一旦スケールは1で固定
-  const size = 50 * scale; // ハイライトのサイズ
-
-  // 仮のハイライト座標 (画面中央あたり)
-  const centerX = canvas.width / 2;
-  const centerY = canvas.height / 2;
-
-  ctx.beginPath();
-  ctx.strokeStyle = "blue"; // 青い枠線
-  ctx.lineWidth = 5;
-  ctx.strokeRect(centerX - size / 2, centerY - size / 2, size, size);
-
-  ctx.fillStyle = "lightblue"; // 薄い青で塗りつぶし
-  ctx.fillRect(centerX - size / 2, centerY - size / 2, size, size);
-//
-  // const baseW = image.naturalWidth;
-//const baseH = image.naturalHeight;
+    
+   const baseW = image.naturalWidth;
+  const baseH = image.naturalHeight;
 
 
 // スマホ画面の幅に合わせて表示サイズを決める
-//const maxDisplayWidth = canvas.parentElement.clientWidth || window.innerWidth;
-//const scale = maxDisplayWidth / baseW;
+const maxDisplayWidth = canvas.parentElement.clientWidth || window.innerWidth;
+const scale = maxDisplayWidth / baseW;
 
 // CSSの見た目サイズ（ディスプレイ用）
-//canvas.style.width = (baseW * scale) + "px";
-//canvas.style.height = (baseH * scale) + "px";
+canvas.style.width = (baseW * scale) + "px";
+canvas.style.height = (baseH * scale) + "px";
 
 // 内部ピクセルサイズを ratio 倍
-//canvas.width = baseW * ratio;
-//canvas.height = baseH * ratio;
+canvas.width = baseW * ratio;
+canvas.height = baseH * ratio;
 
 // 高DPI対応で拡大描画
-//ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
+ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
 
 // 画像描画（切り出しなし）
-//ctx.imageSmoothingEnabled = false;
-//ctx.drawImage(
-  //image,
- // 0, 0, baseW, baseH,  // 元画像の全体を
- // 0, 0, baseW, baseH   // キャンバスにも等倍で描画
-//);
+ctx.imageSmoothingEnabled = false;
+ctx.drawImage(
+  image,
+  0, 0, baseW, baseH,  // 元画像の全体を
+  0, 0, baseW, baseH   // キャンバスにも等倍で描画
+);
 
     
 
