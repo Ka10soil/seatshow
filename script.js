@@ -133,3 +133,12 @@ links.forEach(link => {
   });
 });
 
+function proceedIfAgreed() {
+  const checkbox = document.getElementById('consentCheckbox');
+  if (checkbox.checked) {
+    window.open("https://docs.google.com/forms/d/e/1FAIpQLSeyNcvT0H7vYAGnbPIsaM_NsKXA1EugeslVmHinKDx7BTB76w/viewform?embedded=true" )
+    goHome();
+  } else {
+    alert('確認が完了していません');
+  }
+}
