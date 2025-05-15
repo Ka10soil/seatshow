@@ -1,7 +1,7 @@
 function checkPassword() {
   const input = document.getElementById('authInput').value;
   const message = document.getElementById('authMessage');
-  const correct = "1234"; // 任意のパスワード
+  const correct = "IS2025"; // 任意のパスワード
 
   if (input === correct) {
     message.textContent = "";

@@ -54,6 +54,9 @@
     <button class="wave" onclick="goTonoticeScreen()">申し込み</button>
     <button class="wave" onclick="goToViewer()">自分の席をチェック</button> 
     <button class="wave" onclick="goToAttentionScreen()">注意事項</button>
+    <p></p>
+    <!--<button class="wave" onclick="goToPerformerScreen()">出演者情報</button>-->
+
     <!-- これは今まで通り -->
      <p></p>
      
@@ -99,7 +102,7 @@
     <p>上演中、立ち上がってご鑑賞されることは大変危険です。立ち上がらず、ご自席に座ってお楽しみください。</p> 
     <p>＜全席指定席座席＞</p> 
     <p>本公演は、会場後方の自由席を除き、全席指定席です。ご自分のチケットに記載されたお席をご利用ください。</p> 
-    <p>＜開園後は撮影禁止＞</p>
+    <p>＜開演技後は撮影禁止＞</p>
     <p>開場中に限り、ご自席からの写真撮影は可能です。開園後は休憩・終演後を含め、撮影はお控えください。上演中の録画・録音は法律により禁止されています。</p>
     <p>＜携帯・スマホの電源はOFF＞</p>
     <p>上演中は、スマートフォンやスマートウォッチなど、音及び電光表示を伴う機器の電源はお切りいただくか、マナーモードまたはシアターモードへご設定ください。</p>
@@ -148,6 +151,101 @@
   </div>
 </div>
 
+<div id="performerScreen" class="hidden">
+  <div class="group-container">
+    <h1>IS2025 Performers</h1>
+
+    <div class="group-card">
+      <div class="group-header" onclick="toggleGroup(this)">
+        <h2><span class="material-icons">No.1</span> Misc.</h2>
+        <span class="arrow material-icons">詳細</span>
+      </div>
+      <div class="group-body">
+        <p>新進気鋭のインストバンド。</p>
+        <div class="members">
+          <div class="member">
+
+            <div>
+              <strong>なず</strong>
+              <span class="tag"><span class="material-icons"></span> drum</span>
+            </div>
+          </div>
+          <div class="member">
+
+            <div>
+              <strong>菅谷</strong>
+              <span class="tag"><span class="material-icons"></span> base</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="group-card">
+      <div class="group-header" onclick="toggleGroup(this)">
+        <h2><span class="material-icons">No.2</span> Consoloto</h2>
+        <span class="arrow material-icons">詳細</span>
+      </div>
+      <div class="group-body">
+        <p>secret</p>
+      </div>
+    </div>
+
+    <div class="group-card">
+      <div class="group-header" onclick="toggleGroup(this)">
+        <h2><span class="material-icons">No.3</span> Jiggy</h2>
+        <span class="arrow material-icons">詳細</span>
+      </div>
+      <div class="group-body">
+        <p>secret</p>
+      </div>
+    </div>
+    
+    <div class="group-card">
+      <div class="group-header" onclick="toggleGroup(this)">
+        <h2><span class="material-icons">No.4</span> Glanz</h2>
+        <span class="arrow material-icons">詳細</span>
+      </div>
+      <div class="group-body">
+        <p>secret</p>
+      </div>
+    </div>
+
+    <div class="group-card">
+      <div class="group-header" onclick="toggleGroup(this)">
+        <h2><span class="material-icons">No.5</span> 白湯</h2>
+        <span class="arrow material-icons">詳細</span>
+      </div>
+      <div class="group-body">
+        <p>secret</p>
+      </div>
+    </div>
+
+    <div class="group-card">
+      <div class="group-header" onclick="toggleGroup(this)">
+        <h2><span class="material-icons">No.6</span> Skyscraper</h2>
+        <span class="arrow material-icons">詳細</span>
+      </div>
+      <div class="group-body">
+        <p>secret</p>
+      </div>
+    </div>
+
+    <div class="group-card">
+      <div class="group-header" onclick="toggleGroup(this)">
+        <h2><span class="material-icons"></span> MC</h2>
+        <span class="arrow material-icons">詳細</span>
+      </div>
+      <div class="group-body">
+        <p>secret</p>
+      </div>
+    </div>
+
+  </div>
+
+
+    <p><button onclick="goHome()">ホームに戻る</button></p>
+</div>
 
   <script src="script.js"></script>
 </div>

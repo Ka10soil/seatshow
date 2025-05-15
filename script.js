@@ -1,6 +1,8 @@
 const homeScreen = document.getElementById("homeScreen");
 const viewerScreen = document.getElementById("viewerScreen");
 const attentionScreen = document.getElementById("attentionScreen");
+const performerScreen = document.getElementById("performerScreen");
+
 
 const noticeScreen = document.getElementById("noticeScreen");
 const consentModal = document.getElementById("consentModal");
@@ -23,6 +25,8 @@ function goToAttentionScreen() {
 
     document.getElementById('viewerScreen').style.display = 'none';
     document.getElementById('consentModal').style.display = 'none';
+    document.getElementById('performerScreen').style.display = 'none';
+
 
     document.getElementById('attentionScreen').style.display = 'block';
     blackout.style.opacity = 0;
@@ -30,7 +34,29 @@ function goToAttentionScreen() {
   }, 500);
 
   homeScreen.classList.add("hidden");
-  viewerScreen.classList.remove("hidden");
+  attentionScreen.classList.remove("hidden");
+
+}
+
+function goToPerformerScreen() {
+  showScreenWithGlitch('attentionScreen')
+  blackout.style.pointerEvents = 'auto';
+  blackout.style.opacity = 1;
+  setTimeout(() => {
+    document.getElementById('homeScreen').style.display = 'none';
+
+    document.getElementById('viewerScreen').style.display = 'none';
+    document.getElementById('consentModal').style.display = 'none';
+
+    document.getElementById('attentionScreen').style.display = 'none';
+    document.getElementById('performerScreen').style.display = 'block';
+
+    blackout.style.opacity = 0;
+    blackout.style.pointerEvents = 'none';
+  }, 500);
+
+  homeScreen.classList.add("hidden");
+  performerScreen.classList.remove("hidden");
 
 }
 
@@ -64,6 +90,8 @@ function goHome() {
     document.getElementById('attentionScreen').style.display = 'none';
     document.getElementById('viewerScreen').style.display = 'none';
     document.getElementById('consentModal').style.display = 'none';
+    document.getElementById('performerScreen').style.display = 'none';
+
  
     document.getElementById('homeScreen').style.display = 'block';
     blackout.style.opacity = 0;
@@ -71,6 +99,11 @@ function goHome() {
   }, 500);
 
   viewerScreen.classList.add("hidden");
+  attentionScreen.classList.add("hidden");
+  performerScreen.classList.add("hidden");
+  consentModal.classList.add("hidden");
+
+
   homeScreen.classList.remove("hidden");
 }
 
@@ -141,4 +174,13 @@ function proceedIfAgreed() {
   } else {
     alert('確認が完了していません');
   }
+}
+
+function toggleGroup(header) {
+  const body = header.nextElementSibling;
+  const arrow = header.querySelector('.arrow');
+  const isOpen = body.style.display === 'block';
+
+  body.style.display = isOpen ? 'none' : 'block';
+  header.classList.toggle('open', !isOpen);
 }
