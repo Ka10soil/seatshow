@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="dark light">
+    <meta name="theme-color" content="#000000">
+    <title>座席表示</title>
+  
+    <style>
+      body {
+        background-color: #000000;
+        color: #ffffff;
+      }
+  
+      @media (prefers-color-scheme: dark) {
+        body {
+          background-color: #000000;
+          color: #ffffff;
+        }
+      }
+  
+      @media (prefers-color-scheme: light) {
+        body {
+          background-color: #000000;
+          color: #ffffff;
+        }
+      }
+    </style>
+  
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+
+<body>
+
+  <div id="blackout"></div>
+  <div id="glitch"></div>
+
+  <div class="spotlight-bg1"></div>
+  <div class="spotlight-bg2"></div>
+  <div class="spotlight-bg3"></div>
+  <div class="spotlight-bg4"></div>
+  <div class="spotlight-bg5"></div>
+  <div class="spotlight-bg6"></div>
+
+
+
+  <div class="content">
+  <div id="homeScreen">
+    <p><img src="logo.png-removebg-preview.png" id="logo"alt="logo"></p>
+    <p></p>
+    <button class="wave" onclick="goTonoticeScreen()">申し込み</button>
+    <button class="wave" onclick="goToViewer()">自分の席をチェック</button> 
+    <button class="wave" onclick="goToAttentionScreen()">注意事項</button>
+    <p></p>
+    <button class="wave" onclick="goToPerformerScreen()">出演者情報</button>
+
+    <!-- これは今まで通り -->
+     <p></p>
+     
+    <div id="fly-in">  
+      <div id="s-text"><text>test</text></div>
+      <div><span>まずは申し込みをしよう</span></div>
+      <div><span>座席チェック機能は座席抽選終了後ご利用いただけます</span></div>
+      <div><span>情報更新のタイミング等はISレターをチェック</span></div>
+      <div>Tips<span>自分の席は赤、グループメンバーの席は水色で表示されます </span></div>
+      <div>Tips<span>ミニマップをクリックして拡大/通常表示を切り替えよう </span></div>
+      
+      
+    </div>  
+   
+
+    <script>
+      // イベント日を設定
+      const targetDate = new Date('2025-05-31');
+      const today = new Date();
+      const diffTime = targetDate - today;
+      const daysLeft = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+    
+      // DOMが読み込まれたら実行
+      document.addEventListener('DOMContentLoaded', function () {
+        // SVG内のtext要素を取得して書き換える
+        const textElement = document.querySelector('#s-text text');
+        if (textElement) {
+          textElement.textContent = `IS祭まで残り${daysLeft}日！`;
+        }
+      });
+    </script>
+  </div>
+
+  <div id="viewerScreen" class="hidden">
+    
+  </div>
+
+
+<div id="attentionScreen" class="hidden">
+  <h1>ご来場のみなさまへのお願い</h1>  
+    <p>すべてのお客様が快適にご鑑賞いただけるよう、マナーを守って楽しいひと時をお過ごしください。</p> 
+    <p>＜座ってご鑑賞ください＞ </p>
+    <p>上演中、立ち上がってご鑑賞されることは大変危険です。立ち上がらず、ご自席に座ってお楽しみください。</p> 
+    <p>＜全席指定席座席＞</p> 
+    <p>本公演は、会場後方の自由席を除き、全席指定席です。ご自分のチケットに記載されたお席をご利用ください。</p> 
+    <p>＜開演技後は撮影禁止＞</p>
+    <p>開場中に限り、ご自席からの写真撮影は可能です。開園後は休憩・終演後を含め、撮影はお控えください。上演中の録画・録音は法律により禁止されています。</p>
+    <p>＜携帯・スマホの電源はOFF＞</p>
+    <p>上演中は、スマートフォンやスマートウォッチなど、音及び電光表示を伴う機器の電源はお切りいただくか、マナーモードまたはシアターモードへご設定ください。</p>
+    <p>＜会場内での飲食について＞</p>
+    <p>水やお茶など、蓋つきの容器に入った飲み物のみ、会場内でお飲みいただけます。会場内は大変暑くなることが予想されますので、こまめな水分補給などをしていただき、熱中症にお気を付けください。
+      なお、会場内への食べ物の持ち込みはできません。</p>
+    <p>＜応援マナー＞</p>
+    <p>ペンライトやうちわなどの応援グッズを胸より高く上げる行為は、後ろのお客様の視界を遮る場合がありますのでご遠慮ください。</p>
+    <p>＜観客通路＞</p>
+    <p>一部の演出にて、出演者が観客通路を移動する場合があります。通路に手や足を出したり、荷物を置いたりしないようにお願いします。</p>
+    <p>＜非常時について＞</p>
+    <p>非常の際は、係員や先生の指示に従い、落ち着いて行動してください。また、予めお近くの非常口をお確かめください。</p>
+    <p>以上、お客様へのご協力を、主催者・運営及び出演者より、お願い申し上げます。</p>
+    <p><button onclick="goHome()">ホームに戻る</button></p>
+</div>
+
+<div id="consentModal" class="hidden">
+  <div class="modal-content">
+    <h2>注意事項</h2>
+    <p>以下の内容を確認のうえ、回答に進んでください。</p>
+    <ul>
+    <li>重複応募はお控えください。重複したご応募が確認された場合、公平性の観点より、入場資格を無効とさせていただく場合がございます。</li>
+    
+    <li>お座席はグループ単位で完全にランダムな抽選を行います。可能な限り配慮いたしますが、グループ全員が必ずしも近いお席になるとは限りません。あらかじめご了承いただけますようお願いいたします。</li>
+    
+    <li>本公演は全席指定となっております。応募期間を過ぎてからのお申し込みはできませんので、お忘れのないよう、余裕をもってご応募ください。</li>
+    
+    <li>原則、申し込み後のキャンセル、変更はお受けできません。送信前に今一度、内容をご確認ください。</li>
+    
+    <li>その他、ご不明な点がございましたら、運営委員会IS部署（生徒会室）までお問い合わせください。</li>
+  <style>
+  .modal-content {
+    background: white;
+    padding: 1em;
+    border-radius: 12px;
+    max-width: 90%;
+    box-shadow: 0 0 20px rgba(0,0,0,0.3);
+    text-align: left;
+    color: black;
+    font-size: 12px;
+  }</style>
+  </ul>
+    <p><label><input type="checkbox" id="consentCheckbox"> 確認しました</label><br></p>
+    <button onclick="proceedIfAgreed()">フォームを開く</a>
+    </button><button onclick="goHome()">ホームに戻る</button>
+  </div>
+</div>
+
+<div id="performerScreen" class="hidden">
+  <div class="group-container">
+    <h1>IS2025 Performers</h1>
+
+    <div class="group-card">
+      <div class="group-header" onclick="toggleGroup(this)">
+        <h2><span class="material-icons">例</span> example</h2>
+        <span class="arrow material-icons">詳細</span>
+      </div>
+      <div class="group-body">
+        <p>説明文とか。</p>
+        <div class="members">
+          <div class="member">
+
+            <div>
+              <strong>山田太郎</strong>
+              <span class="tag"><span class="material-icons"></span> 楽器とか？</span>
+            </div>
+          </div>
+          <div class="member">
+
+            <div>
+              <strong>山田花子</strong>
+              <span class="tag"><span class="material-icons"></span> なんでもいいです</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+  <div class="group-card">
+    <div class="group-header" onclick="toggleGroup(this)">
+      <h2><span class="material-icons">No.1</span> Misc.</h2>
+      <span class="arrow material-icons">詳細</span>
+    </div>
+    <div class="group-body">
+      <p>secret</p>
+    </div>
+    </div>
+
+    <div class="group-card">
+      <div class="group-header" onclick="toggleGroup(this)">
+        <h2><span class="material-icons">No.2</span> Consoloto</h2>
+        <span class="arrow material-icons">詳細</span>
+      </div>
+      <div class="group-body">
+        <p>secret</p>
+      </div>
+    </div>
+
+    <div class="group-card">
+      <div class="group-header" onclick="toggleGroup(this)">
+        <h2><span class="material-icons">No.3</span> Jiggy</h2>
+        <span class="arrow material-icons">詳細</span>
+      </div>
+      <div class="group-body">
+        <p>secret</p>
+      </div>
+    </div>
+    
+    <div class="group-card">
+      <div class="group-header" onclick="toggleGroup(this)">
+        <h2><span class="material-icons">No.4</span> Glanz</h2>
+        <span class="arrow material-icons">詳細</span>
+      </div>
+      <div class="group-body">
+        <p>secret</p>
+      </div>
+    </div>
+
+    <div class="group-card">
+      <div class="group-header" onclick="toggleGroup(this)">
+        <h2><span class="material-icons">No.5</span> 白湯</h2>
+        <span class="arrow material-icons">詳細</span>
+      </div>
+      <div class="group-body">
+        <p>secret</p>
+      </div>
+    </div>
+
+    <div class="group-card">
+      <div class="group-header" onclick="toggleGroup(this)">
+        <h2><span class="material-icons">No.6</span> Skyscraper</h2>
+        <span class="arrow material-icons">詳細</span>
+      </div>
+      <div class="group-body">
+        <p>secret</p>
+      </div>
+    </div>
+
+    <div class="group-card">
+      <div class="group-header" onclick="toggleGroup(this)">
+        <h2><span class="material-icons"></span> MC</h2>
+        <span class="arrow material-icons">詳細</span>
+      </div>
+      <div class="group-body">
+        <p>secret</p>
+      </div>
+    </div>
+
+  </div>
+
+
+    <p><button onclick="goHome()">ホームに戻る</button></p>
+</div>
+
+  <script src="script.js"></script>
+</div>
+
+</body>
+</html>
