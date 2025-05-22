@@ -66,8 +66,11 @@ html {
         font-size: 16px;
         color: rgb(0, 0, 0);
     }
+    #moji{
+        font-size: 14px
+    }
     
-      
+    
     
     button {
         background: linear-gradient(45deg, #00FFFF, #FF059A);

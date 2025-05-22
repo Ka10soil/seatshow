@@ -264,8 +264,8 @@ const seatData = {
 ],
 "AF": [
   { "start": 1, "count": 7, "x": 2797.4, "y": 2143, "dy": 45.4 },
-  { "start": 8, "count": 10, "x": 2797.4, "y": 1730, "dy": 45.4 },
-  { "start": 19, "count": 9, "x": 2797.4, "y": 1229, "dy": 45.4 },
+  { "start": 8, "count": 5, "x": 2797.4, "y": 1730, "dy": 45.4 },
+  { "start": 19, "count": 7, "x": 2797.4, "y": 1138.2, "dy": 45.4 },
   { "start": 28, "count": 7, "x": 2797.4, "y": 749,  "dy": 45.4 }
 ]
 
@@ -405,7 +405,7 @@ ctx.drawImage(
 
         ctx.fillStyle = groupSeats.includes(label) 
         ? "rgba(100, 200, 255, 0.3)"
-        : (label === mySeat ? "rgba(190, 70, 255, 0.3)" : "rgba(255, 255, 255, 0.05)");
+        : (label === mySeat ? "rgba(190, 70, 255, 0.3)" : "rgba(255, 255, 255, 0)");
 
         ctx.fillRect(x - size/2, y - size/2, size, size);
       }
