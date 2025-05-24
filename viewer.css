@@ -17,7 +17,7 @@ html {
         text-align: center;
     }
     
-      
+     
 
       
 
@@ -68,6 +68,14 @@ html {
     }
     #moji{
         font-size: 14px
+    }
+    #message{
+        font-size: 14px
+    }
+    #countdown{
+        font-size: 50px;
+        color: rgb(255, 0, 0);
+        font-family: 'Dela Gothic One', sans-serif;
     }
     
     

@@ -1,7 +1,7 @@
 const homeScreen = document.getElementById("homeScreen");
 const viewerScreen = document.getElementById("viewerScreen");
 const attentionScreen = document.getElementById("attentionScreen");
-const performerScreen = document.getElementById("performerScreen");
+
 
 
 const noticeScreen = document.getElementById("noticeScreen");
@@ -12,7 +12,22 @@ window.addEventListener("resize", () => {
 });
 
 function goToViewer() {
-  window.location.href = "viewer.html";
+  const blackout = document.getElementById('blackout');
+  const glitch = document.getElementById('glitch');
+
+  // グリッチ発動
+  glitch.style.opacity = 1;
+  glitch.style.animation = 'glitchEffect 0.6s ease-in-out';
+
+  setTimeout(() => {
+    blackout.style.opacity = 1;
+  }, 300);
+
+  setTimeout(() => {
+    // ここで画面切り替え！！
+    window.location.href = "viewer.html";
+  }, 400);
+  
 }
 
 
@@ -39,24 +54,22 @@ function goToAttentionScreen() {
 }
 
 function goToPerformerScreen() {
-  showScreenWithGlitch('attentionScreen')
-  blackout.style.pointerEvents = 'auto';
-  blackout.style.opacity = 1;
+  const blackout = document.getElementById('blackout');
+  const glitch = document.getElementById('glitch');
+
+  // グリッチ発動
+  glitch.style.opacity = 1;
+  glitch.style.animation = 'glitchEffect 0.6s ease-in-out';
+
   setTimeout(() => {
-    document.getElementById('homeScreen').style.display = 'none';
+    blackout.style.opacity = 1;
+  }, 300);
 
-    document.getElementById('viewerScreen').style.display = 'none';
-    document.getElementById('consentModal').style.display = 'none';
-
-    document.getElementById('attentionScreen').style.display = 'none';
-    document.getElementById('performerScreen').style.display = 'block';
-
-    blackout.style.opacity = 0;
-    blackout.style.pointerEvents = 'none';
-  }, 500);
-
-  homeScreen.classList.add("hidden");
-  performerScreen.classList.remove("hidden");
+  setTimeout(() => {
+    // ここで画面切り替え！！
+    window.location.href = "performers.html";
+  }, 400);
+  
 
 }
 
@@ -176,11 +189,4 @@ function proceedIfAgreed() {
   }
 }
 
-function toggleGroup(header) {
-  const body = header.nextElementSibling;
-  const arrow = header.querySelector('.arrow');
-  const isOpen = body.style.display === 'block';
 
-  body.style.display = isOpen ? 'none' : 'block';
-  header.classList.toggle('open', !isOpen);
-}
