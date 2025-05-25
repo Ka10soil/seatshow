@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="color-scheme" content="dark light">
     <meta name="theme-color" content="#000000">
+    <link href="https://fonts.googleapis.com/css2?family=Dela Gothic One&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Neonderthaw&display=swap" rel="stylesheet">
     <title>座席表示</title>
   
     <style>
@@ -41,10 +43,14 @@
  
 
 
+
+
+
   <div class="content">
   <div id="homeScreen">
-  
-   <h1>ご利用の前に</h1>
+
+
+    <h1>ご利用の前に</h1>
     <p >・一部機種によって機能が十分に使えない不具合が生じる場合がございます</p>
     <p id="moji">
       (現在確認されている不具合)<br/>iphone12以降で通常ハイライトが表示されない<br/>※使用上特に問題はございません
@@ -53,7 +59,8 @@
 
 
 
-    <button class="wave" onclick="goToViewer()">自分の席をチェック</button> 
+
+    <button class="wave" onclick="goToViewerTimer()">自分の席をチェック</button> 
   
     
     </div>  
@@ -61,7 +68,45 @@
 
   </div>
 
+
   <div id="viewerScreen" class="hidden">
+    
+  <p id="message">座席はまだ公開されていません。</p>
+  <p id="countdown"></p>
+  <button onclick="goHome()">ホームに戻る</button></p>
+</div>
+
+  <script>
+    const releaseTime = new Date("2025-05-26T12:40:00+09:00");  // 公開時刻
+const countdownEl = document.getElementById("countdown");
+const messageEl = document.getElementById("message");
+
+function updateStatus() {
+  const now = new Date();
+  const diff = releaseTime - now;
+
+  if (diff <= 0) {
+    messageEl.textContent = "座席配置が公開されました！";
+      
+      goToViewer();
+      
+  
+    
+  } else {
+    const minutes = String(Math.floor(diff / 60000)).padStart(2, '0');
+const seconds = String(Math.floor((diff % 60000) / 1000)).padStart(2, '0');
+    countdownEl.textContent = ` ${minutes}:${seconds}`;
+    setTimeout(updateStatus, 1000);
+  }
+}
+
+// 初期化
+</script>
+
+
+
+
+  <div id="viewercontent" class="hidden">
     <div id="te"><h1>座席ビューア</h1>
     <p>HRNOを入力して座席を確認</p>
     <p>現在入力されているデータはテスト用です</p>
@@ -69,7 +114,8 @@
     
     
     <p><button onclick="highlightGroup()">表示</button>
-    <button onclick="goHome()">ホームに戻る</button></p></div>
+    <button onclick="goHome()">ホームに戻る</button></p>
+  </div>
     <div id="output"></div>
     <div id="mapContainer" style="position: relative; display: inline-block;">
       <img id="seatImage" src="seatmap.jpg" style="width: 100%; display: block;">
@@ -83,8 +129,10 @@
   </div>
 
 
-  <script src="viewer.js"></script>
+
+  
 </div>
 
+<script src="viewertest.js"></script>
 </body>
 </html>

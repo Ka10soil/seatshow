@@ -371,7 +371,7 @@ html {
   flex: 1 1 250px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
   backdrop-filter: blur(8px);
-  max-width: 150px; 
+  max-width: 140px; 
   
 }
 
@@ -390,8 +390,8 @@ html {
 }
 
 .disc img {
-  width: 180px;
-  height: 250px;
+  width: 60%;
+  height: 100%;
   
 }
 
@@ -405,11 +405,18 @@ html {
   margin-top: 0rem;
 }
 
-  #orange {
+    #orange {
     background: orange;
     }
-  
-
+    #green {
+        background: green;
+    }    
+    #red {
+        background: red;
+    }  
+    #blue {
+        background: blue;
+    }
 
 .material-icons {
   font-size: 1.2rem;
