@@ -5,7 +5,7 @@ const homeScreen = document.getElementById("homeScreen");
 
 
 function goHome() {
-  window.location.href = "indextest.html";
+  window.location.href = "indextrue.html";
 }
 
 const blackout = document.getElementById('blackout');
